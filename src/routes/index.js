@@ -5,6 +5,7 @@ import Intro from '../containers/introPage';
 import Play from '../containers/playPage';
 import Library from '../containers/libraryPage';
 import Box from '../containers/boxPage';
+
 export default [
 	{
 		path: '/',
@@ -27,6 +28,7 @@ export default [
 				path: '/library',
 				component: Library
 			},
+
 			{
 				path: '/box',
 				component: Box

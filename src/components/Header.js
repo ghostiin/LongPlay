@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../assets/imgs/TITLE-LOGO.svg';
 import navblock from '../assets/imgs/nav-block.svg';
-
-const Wrapper = styled.div`
+import { OriginWrapper } from '../theme/style';
+const Wrapper = styled(OriginWrapper)`
 	display: flex;
 	justify-content: space-between;
 	font-size: 1.6rem;

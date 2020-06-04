@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LongDash } from './style';
+import { LongDash } from '../theme/style';
 
 const Wrapper = styled.div`
 	font-size: 1.4rem;

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import landing from '../../assets/imgs/bg-landing.png';
 import landing2x from '../../assets/imgs/bg-landing@2x.png';
-import Footer from '../../components/Footer';
+import { OriginWrapper } from '../../theme/style';
 
-const Wrapper = styled.div`
+const Wrapper = styled(OriginWrapper)`
 	display: flex;
 	flex-direction: column;
 `;

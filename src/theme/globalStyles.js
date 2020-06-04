@@ -55,9 +55,6 @@ html {
 }
 }
 
-
-
-
 body {
     line-height: 1;
     background-color: ${({ theme }) => theme.colors.bgColor};
