@@ -53,7 +53,7 @@ const Slider = () => {
 				setSliderSwiper(newSwiper);
 			}
 		},
-		[ banners.length, sliderSwiper ]
+		[ sliderSwiper ]
 	);
 
 	return (

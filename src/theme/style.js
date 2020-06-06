@@ -6,8 +6,8 @@ export const SecondStyle = createGlobalStyle`
         /* background-color: ${({ theme }) => theme.colors.main} */
         background-image: linear-gradient(to bottom,
         ${({ theme }) => theme.colors.main},
-        ${({ theme }) => theme.colors.main} 90%,
-        ${({ theme }) => theme.colors.dark} 90%);
+        ${({ theme }) => theme.colors.main} 80%,
+        ${({ theme }) => theme.colors.dark} 80%);
         background-repeat: no-repeat;
         background-size: cover;
     }

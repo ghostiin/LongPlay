@@ -1,4 +1,5 @@
 import React from 'react';
+import { forceCheck } from 'react-lazyload';
 import AlbumItem from './AlbumItem';
 import styled from 'styled-components';
 const AlbumsListWrapper = styled.div`
@@ -13,11 +14,11 @@ const AlbumsListWrapper = styled.div`
 
 const AlbumList = ({ albums }) => {
 	const renderList = (albums) => {
-		return albums.map((album, id) => {
-			return <AlbumItem album={album} key={id} />;
+		return albums.map((album) => {
+			return <AlbumItem album={album} key={album.id} />;
 		});
 	};
-	return <AlbumsListWrapper>{renderList(albums)}</AlbumsListWrapper>;
+	return <AlbumsListWrapper onScroll={forceCheck}>{renderList(albums)}</AlbumsListWrapper>;
 };
 
 export default AlbumList;

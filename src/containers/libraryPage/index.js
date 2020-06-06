@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import { connect } from 'react-redux';
+import { getNewestAlbumsList } from './store/action';
+
 import { SecondStyle } from '../../theme/style';
 import downArrow from '../../assets/imgs/down-arrow.svg';
 import { HorizonLine as Hr } from '../../theme/style';
@@ -8,10 +12,7 @@ import Search from '../../components/Search';
 import Slider from '../../components/Slider';
 import AlbumList from '../../components/AlbumList';
 import Button from '../../components/UI/Button';
-
-const albums = [ 0, 1, 2, 3, 4, 5, 6 ].map(() => {
-	return { imgUrl: 'https://p2.music.126.net/hPCvLRx5TxSWul9YY5n6sA==/109951165023441548.jpg?param=177y177' };
-});
+import Loadingv1 from '../../components/UI/Loading';
 
 const Wrapper = styled.div`
 	font-size: 1.6rem;
@@ -36,12 +37,21 @@ const LinkButton = styled(Button)`
 	right:8rem;
 `;
 
-const Library = () => {
+const Library = ({ route, albums, loading: isLoading, getNewestAlbumsList }) => {
+	useEffect(
+		() => {
+			if (!albums.length) {
+				getNewestAlbumsList();
+			}
+		},
+		[ albums.length, getNewestAlbumsList ]
+	);
 	return (
 		<React.Fragment>
 			<SecondStyle />
+			{renderRoutes(route.routes)}
 			<Wrapper>
-				<img src={downArrow} />
+				<img src={downArrow} alt="down-arrow" />
 				<Link to="/box">
 					<LinkButton>Back To My Box</LinkButton>
 				</Link>
@@ -53,10 +63,17 @@ const Library = () => {
 					THE NEWEST
 				</Caption>
 				<Hr width="70%" />
-				<AlbumList albums={albums} />
+				{isLoading ? <Loadingv1 /> : <AlbumList albums={albums} />}
 			</Wrapper>
 		</React.Fragment>
 	);
 };
 
-export default Library;
+const mapStateToProps = (state) => {
+	return {
+		albums: state.library.albumsList,
+		loading: state.library.loading
+	};
+};
+
+export default connect(mapStateToProps, { getNewestAlbumsList })(Library);

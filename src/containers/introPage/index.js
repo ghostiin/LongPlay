@@ -9,6 +9,7 @@ const Wrapper = styled(OriginWrapper)`
 	display: flex;
 	flex-direction: column;
 `;
+
 const Landing = styled.div`
 	background-image: url(${landing});
 	position: fixed;
@@ -36,6 +37,7 @@ const Title = styled.div`
 	text-transform: uppercase;
 	margin-top: 30rem;
 `;
+
 const SubTitle = styled.div`
 	font-size: 2.8rem;
 	font-family: ${({ theme }) => theme.fonts.text.regular};

@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux';
-
-export default combineReducers({});
+import { reducer as libraryReducer } from '../containers/libraryPage/store';
+export default combineReducers({
+	library: libraryReducer
+});

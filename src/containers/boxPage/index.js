@@ -6,9 +6,7 @@ import downArrow from '../../assets/imgs/down-arrow.svg';
 import AlbumList from '../../components/AlbumList';
 import Button from '../../components/UI/Button';
 
-const albums = [ 0, 1, 2 ].map(() => {
-	return { imgUrl: 'https://p2.music.126.net/GvLtj95TlNaNjlmzw-nrXQ==/109951165036113617.jpg' };
-});
+const albums = [];
 
 const Wrapper = styled.div`
 	font-size: 1.6rem;
@@ -30,7 +28,7 @@ const Box = () => {
 		<React.Fragment>
 			<SecondStyle />
 			<Wrapper>
-				<img src={downArrow} />
+				<img src={downArrow} alt="down-arrow" />
 
 				<Link to="/library">
 					<LinkButton>Pick Fav Albums</LinkButton>

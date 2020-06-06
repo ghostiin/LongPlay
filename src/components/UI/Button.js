@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../../assets/imgs/TITLE-LOGO.svg';
+// import logo from '../../assets/imgs/TITLE-LOGO.svg';
 
 export default styled.button`
 	color: ${({ theme }) => theme.colors.text};
