@@ -33,9 +33,9 @@ const Caption = styled.div`
 `;
 
 const LinkButton = styled(Button)`
-	position: absolute;
-	top:5rem;
-	right:8rem;
+	position: fixed;
+	bottom:5rem;
+	right:5rem;
 `;
 
 const Library = ({ route, albums, loading: isLoading, getNewestAlbumsList }) => {

@@ -27,15 +27,15 @@ const InitialWrapper = styled.div`
 `;
 
 const LinkButton = styled(Button)`
-	position: absolute;
-	top:5rem;
-	right:8rem;
+	position: fixed;
+	bottom:5rem;
+	right:5rem;
 `;
 
 const Box = ({ box, route }) => {
 	const albums = _.values(box);
 	const Initial = () => {
-		return <InitialWrapper>Add Your First Album ↗</InitialWrapper>;
+		return <InitialWrapper>Add Your First Album ↘</InitialWrapper>;
 	};
 
 	const BoxIndex = () => {
