@@ -1,12 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const sizeContainer = {
-	small: '24px',
-	default: '30px',
-	large: '36px'
-};
-
 const stretchdelay = keyframes`
   0%,
   40%,

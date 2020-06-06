@@ -3,10 +3,16 @@ import { connect } from 'react-redux';
 import AlbumModal from '../../components/AlbumModal';
 import { chooseAlbum } from './store/action';
 
-const AlbumDetail = ({ history, chooseAlbum, detail }) => {
+const LibraryAlbumDetail = ({ history, chooseAlbum, detail }) => {
 	useEffect(() => {
-		chooseAlbum(history.location.pathname.split('/')[2]);
+		const id = history.location.pathname.split('/')[2];
+		try {
+			if (detail.album.id.toString() !== id) chooseAlbum(id);
+		} catch (e) {
+			chooseAlbum(id);
+		}
 	}, []);
+
 	return <AlbumModal onDismiss={() => history.push('/library')} />;
 };
 
@@ -16,4 +22,4 @@ const mapStateToProp = (state) => {
 	};
 };
 
-export default connect(mapStateToProp, { chooseAlbum })(AlbumDetail);
+export default connect(mapStateToProp, { chooseAlbum })(LibraryAlbumDetail);

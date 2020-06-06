@@ -5,7 +5,7 @@ import Intro from '../containers/introPage';
 import Play from '../containers/playPage';
 import Library from '../containers/libraryPage';
 import LibraryAlbumDetail from '../containers/libraryPage/AlbumDetail';
-import BoxAlbumDetail from '../containers/libraryPage/AlbumDetail';
+import BoxAlbumDetail from '../containers/boxPage/AlbumDetail';
 import Box from '../containers/boxPage';
 
 export default [

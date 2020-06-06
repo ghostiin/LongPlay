@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { getNewestAlbums, getAlbumDetail } from '../../../api/request';
 
 export const GET_NEWEST_ALBUMS = 'GET_NEWEST_ALBUMS';
@@ -15,12 +14,11 @@ export const getNewestAlbumsList = () => async (dispatch) => {
 
 export const CHOOSE_ALBUM = 'CHOOSE_ALBUM';
 
-export const chooseAlbum = (id) => (dispatch) => _chooseAlbum(id, dispatch);
-
-const _chooseAlbum = _.memoize(async (id, dispatch) => {
+export const chooseAlbum = (id) => async (dispatch) => {
 	const album = await getAlbumDetail(id);
+
 	dispatch({
 		type: CHOOSE_ALBUM,
 		payload: album
 	});
-});
+};

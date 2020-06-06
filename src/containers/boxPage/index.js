@@ -8,7 +8,6 @@ import { SecondStyle } from '../../theme/style';
 import downArrow from '../../assets/imgs/down-arrow.svg';
 import AlbumList from '../../components/AlbumList';
 import Button from '../../components/UI/Button';
-import Loadingv1 from '../../components/UI/Loading';
 
 const Wrapper = styled.div`
 	font-size: 1.6rem;
@@ -17,6 +16,14 @@ const Wrapper = styled.div`
 	padding-top: 5rem;
 	background-color: ${({ theme }) => theme.colors.bgColor};
 	position: relative;
+`;
+const InitialWrapper = styled.div`
+	position: absolute;
+	left: 50%;
+	top: 30rem;
+	transform: translateX(-50%);
+	font-size: 3rem;
+	color: ${({ theme }) => theme.colors.sub};
 `;
 
 const LinkButton = styled(Button)`
@@ -27,6 +34,17 @@ const LinkButton = styled(Button)`
 
 const Box = ({ box, route }) => {
 	const albums = _.values(box);
+	const Initial = () => {
+		return <InitialWrapper>Add Your First Album ↗</InitialWrapper>;
+	};
+
+	const BoxIndex = () => {
+		return (
+			<React.Fragment>
+				<AlbumList albums={albums} parentPage="box" />
+			</React.Fragment>
+		);
+	};
 	return (
 		<React.Fragment>
 			<SecondStyle />
@@ -36,7 +54,7 @@ const Box = ({ box, route }) => {
 				<Link to="/library">
 					<LinkButton>Pick Fav Albums</LinkButton>
 				</Link>
-				<AlbumList albums={albums} parentPage="box" />
+				{albums.length ? <BoxIndex /> : <Initial />}
 			</Wrapper>
 		</React.Fragment>
 	);
