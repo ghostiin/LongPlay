@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { renderRoutes } from 'react-router-config';
 import { SecondStyle } from '../../theme/style';
 import downArrow from '../../assets/imgs/down-arrow.svg';
 import AlbumList from '../../components/AlbumList';
 import Button from '../../components/UI/Button';
-
-const albums = [];
+import Loadingv1 from '../../components/UI/Loading';
 
 const Wrapper = styled.div`
 	font-size: 1.6rem;
@@ -23,20 +25,25 @@ const LinkButton = styled(Button)`
 	right:8rem;
 `;
 
-const Box = () => {
+const Box = ({ box, route }) => {
+	const albums = _.values(box);
 	return (
 		<React.Fragment>
 			<SecondStyle />
+			{renderRoutes(route.routes)}
 			<Wrapper>
 				<img src={downArrow} alt="down-arrow" />
-
 				<Link to="/library">
 					<LinkButton>Pick Fav Albums</LinkButton>
 				</Link>
-				<AlbumList albums={albums} />
+				<AlbumList albums={albums} parentPage="box" />
 			</Wrapper>
 		</React.Fragment>
 	);
 };
 
-export default Box;
+const mapStateToState = (state) => {
+	return { box: state.box };
+};
+
+export default connect(mapStateToState)(Box);

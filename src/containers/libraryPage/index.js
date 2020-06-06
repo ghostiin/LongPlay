@@ -11,6 +11,7 @@ import { HorizonLine as Hr } from '../../theme/style';
 import Search from '../../components/Search';
 import Slider from '../../components/Slider';
 import AlbumList from '../../components/AlbumList';
+
 import Button from '../../components/UI/Button';
 import Loadingv1 from '../../components/UI/Loading';
 
@@ -63,7 +64,8 @@ const Library = ({ route, albums, loading: isLoading, getNewestAlbumsList }) => 
 					THE NEWEST
 				</Caption>
 				<Hr width="70%" />
-				{isLoading ? <Loadingv1 /> : <AlbumList albums={albums} />}
+
+				{isLoading ? <Loadingv1 /> : <AlbumList albums={albums} parentPage="library" />}
 			</Wrapper>
 		</React.Fragment>
 	);

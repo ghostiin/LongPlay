@@ -1,8 +1,9 @@
-import { GET_NEWEST_ALBUMS, CHANGE_LOADING } from './action';
+import { GET_NEWEST_ALBUMS, CHANGE_LOADING, CHOOSE_ALBUM } from './action';
 
 const defaultState = {
 	loading: true,
-	albumsList: []
+	albumsList: [],
+	albumDetail: {}
 };
 
 export default (state = defaultState, action) => {
@@ -11,6 +12,8 @@ export default (state = defaultState, action) => {
 			return { ...state, albumsList: action.payload };
 		case CHANGE_LOADING:
 			return { ...state, loading: false };
+		case CHOOSE_ALBUM:
+			return { ...state, albumDetail: action.payload };
 		default:
 			return state;
 	}

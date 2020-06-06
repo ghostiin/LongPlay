@@ -4,8 +4,9 @@ import Home from '../components/Home';
 import Intro from '../containers/introPage';
 import Play from '../containers/playPage';
 import Library from '../containers/libraryPage';
+import LibraryAlbumDetail from '../containers/libraryPage/AlbumDetail';
+import BoxAlbumDetail from '../containers/libraryPage/AlbumDetail';
 import Box from '../containers/boxPage';
-import AlbumDetail from '../components/AlbumDetail';
 
 export default [
 	{
@@ -32,14 +33,20 @@ export default [
 				routes: [
 					{
 						path: '/library/:id',
-						component: AlbumDetail
+						component: LibraryAlbumDetail
 					}
 				]
 			},
 
 			{
 				path: '/box',
-				component: Box
+				component: Box,
+				routes: [
+					{
+						path: '/box/:id',
+						component: BoxAlbumDetail
+					}
+				]
 			}
 		]
 	}

@@ -12,10 +12,10 @@ const AlbumsListWrapper = styled.div`
 	margin: 6rem 30rem;
 `;
 
-const AlbumList = ({ albums }) => {
+const AlbumList = ({ albums, parentPage }) => {
 	const renderList = (albums) => {
 		return albums.map((album) => {
-			return <AlbumItem album={album} key={album.id} />;
+			return <AlbumItem album={album} key={album.id} parentPage={parentPage} />;
 		});
 	};
 	return <AlbumsListWrapper onScroll={forceCheck}>{renderList(albums)}</AlbumsListWrapper>;

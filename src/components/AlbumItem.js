@@ -2,6 +2,7 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Control from './Control/index';
 import albumMsk from '../assets/imgs/album-msk.svg';
 import defaultCover from '../assets/imgs/default-cover.svg';
 
@@ -45,11 +46,11 @@ const AlbumSinger = styled.div`
 	}
 `;
 
-const AlbumItem = ({ album, titleSize }) => {
+const AlbumItem = ({ album, titleSize, parentPage }) => {
 	return (
 		<AlbumItemWrapper>
 			<LazyLoad>
-				<Link to={`/library/${album.id}`}>
+				<Link to={`/${parentPage}/${album.id}`}>
 					<AlbumMsk albumImg={album.picUrl} />
 				</Link>
 			</LazyLoad>
@@ -58,6 +59,7 @@ const AlbumItem = ({ album, titleSize }) => {
 				<span>By</span>
 				{album.artist.name}
 			</AlbumSinger>
+			<Control resource={album} />
 		</AlbumItemWrapper>
 	);
 };

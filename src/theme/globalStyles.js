@@ -27,6 +27,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 0;
   box-sizing: inherit;
 }
+
+::selection {
+    background:inherit; 
+    color:inherit;
+}
+
+::-moz-selection {
+    background:inherit; 
+    color:inherit;
+}
+
+::-webkit-selection {
+    background:inherit; 
+    color:inherit;
+}
+
 html {
   text-size-adjust: 100%;
   box-sizing: border-box;
