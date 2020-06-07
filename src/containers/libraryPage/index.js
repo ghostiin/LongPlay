@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
-import { getNewestAlbumsList } from './store/action';
+import { getRecommendList } from './store/action';
 
 import { SecondStyle } from '../../theme/style';
 import downArrow from '../../assets/imgs/down-arrow.svg';
 import { HorizonLine as Hr } from '../../theme/style';
-import Search from '../../components/Search';
+import SearchBox from '../../components/SearchBox';
 import Slider from '../../components/Slider';
 import AlbumList from '../../components/AlbumList';
 
@@ -38,15 +38,15 @@ const LinkButton = styled(Button)`
 	right:5rem;
 `;
 
-const Library = ({ route, albums, loading: isLoading, getNewestAlbumsList }) => {
-	useEffect(
-		() => {
-			if (!albums.length) {
-				getNewestAlbumsList();
-			}
-		},
-		[ albums.length, getNewestAlbumsList ]
-	);
+const Library = ({ route, albums, loading: isLoading, getRecommendList }) => {
+	const [ term, setTerm ] = useState('');
+	const inputEl = useRef();
+	const handleTerm = (t) => {
+		setTerm(t);
+	};
+	useEffect(() => {
+		getRecommendList();
+	}, []);
 	return (
 		<React.Fragment>
 			<SecondStyle />
@@ -56,16 +56,19 @@ const Library = ({ route, albums, loading: isLoading, getNewestAlbumsList }) => 
 				<Link to="/box">
 					<LinkButton>Back To My Box</LinkButton>
 				</Link>
-				<Search />
+				<Link to="/search">
+					<SearchBox ref={inputEl} handleInput={handleTerm} />
+				</Link>
 				<Hr />
 				<Caption>VOL.001 SUMMER MIRAGE</Caption>
 				<Slider />
 				<Caption marginTop="8rem" marginBottom="1rem">
-					THE NEWEST
+					GOOD MUSIC TO BAD DAYS (●'◡'●)
 				</Caption>
 				<Hr width="70%" />
 
-				{isLoading ? <Loadingv1 /> : <AlbumList albums={albums} parentPage="library" />}
+				{/* {isLoading ? <Loadingv1 /> : <AlbumList albums={albums} parentPage="library" />} */}
+				{!albums ? <Loadingv1 /> : <AlbumList albums={albums} parentPage="library" />}
 			</Wrapper>
 		</React.Fragment>
 	);
@@ -78,4 +81,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { getNewestAlbumsList })(Library);
+export default connect(mapStateToProps, { getRecommendList })(Library);

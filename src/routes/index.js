@@ -5,7 +5,9 @@ import Intro from '../containers/introPage';
 import Play from '../containers/playPage';
 import Library from '../containers/libraryPage';
 import LibraryAlbumDetail from '../containers/libraryPage/AlbumDetail';
+import Search from '../containers/searchPage';
 import BoxAlbumDetail from '../containers/boxPage/AlbumDetail';
+import SearchAlbumDetail from '../containers/searchPage/AlbumDetail';
 import Box from '../containers/boxPage';
 
 export default [
@@ -34,6 +36,16 @@ export default [
 					{
 						path: '/library/:id',
 						component: LibraryAlbumDetail
+					}
+				]
+			},
+			{
+				path: '/search',
+				component: Search,
+				routes: [
+					{
+						path: '/search/:id',
+						component: SearchAlbumDetail
 					}
 				]
 			},

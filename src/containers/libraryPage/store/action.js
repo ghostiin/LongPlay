@@ -1,19 +1,18 @@
-import { getNewestAlbums, getAlbumDetail } from '../../../api/request';
+import { getAlbumDetail } from '../../../api/request';
+import recommendList from './staticRecommend';
 
-export const GET_NEWEST_ALBUMS = 'GET_NEWEST_ALBUMS';
+export const GET_RECOMMEND_ALBUMS = 'GET_RECOMMEND_ALBUMS';
 export const CHANGE_LOADING = 'CHANGE_LOADING';
-
-export const getNewestAlbumsList = () => async (dispatch) => {
-	const res = await getNewestAlbums();
-	dispatch({
-		type: GET_NEWEST_ALBUMS,
-		payload: res.albums
-	});
-	dispatch({ type: CHANGE_LOADING, payload: false });
+export const getRecommendList = () => {
+	const res = recommendList;
+	console.log('res', res);
+	return {
+		type: GET_RECOMMEND_ALBUMS,
+		payload: res
+	};
 };
 
 export const CHOOSE_ALBUM = 'CHOOSE_ALBUM';
-
 export const chooseAlbum = (id) => async (dispatch) => {
 	const album = await getAlbumDetail(id);
 
