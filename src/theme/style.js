@@ -3,13 +3,21 @@ import styled, { createGlobalStyle } from 'styled-components';
 export const OriginWrapper = styled.div`margin: 5rem 8rem;`;
 export const SecondStyle = createGlobalStyle`
     body {
-        /* background-color: ${({ theme }) => theme.colors.main} */
+        /* background-color: ${({ theme }) => theme.colors.dark} */
         background-image: linear-gradient(to bottom,
         ${({ theme }) => theme.colors.main},
         ${({ theme }) => theme.colors.main} 80%,
         ${({ theme }) => theme.colors.dark} 80%);
         background-repeat: no-repeat;
         background-size: cover;
+		
+    }
+`;
+
+export const PlayerStyle = createGlobalStyle`
+    body {
+        /* background-color: ${({ theme }) => theme.colors.main} */
+       background-color:  ${({ theme }) => theme.colors.main}
     }
 `;
 

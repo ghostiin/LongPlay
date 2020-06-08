@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import { SecondStyle } from '../../theme/style';
-import downArrow from '../../assets/imgs/down-arrow.svg';
+import DownArrow from '../../components/UI/DownArrow';
 import AlbumList from '../../components/AlbumList';
 import Button from '../../components/UI/Button';
 
@@ -50,7 +50,7 @@ const Box = ({ box, route }) => {
 			<SecondStyle />
 			{renderRoutes(route.routes)}
 			<Wrapper>
-				<img src={downArrow} alt="down-arrow" />
+				<DownArrow />
 				<Link to="/library">
 					<LinkButton>Pick Fav Albums</LinkButton>
 				</Link>

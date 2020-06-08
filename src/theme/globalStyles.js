@@ -47,6 +47,8 @@ html {
   text-size-adjust: 100%;
   box-sizing: border-box;
 
+
+
   @media ${({ theme }) => theme.mediaQueries['below-768']} {
     color: violet;
   }
@@ -74,8 +76,16 @@ html {
 body {
     line-height: 1;
     background-color: ${({ theme }) => theme.colors.bgColor};
-    color: ${({ theme }) => theme.colors.text}
+    color: ${({ theme }) => theme.colors.text};
+    scrollbar-width: none; /*not working for firefox 77 */
+    -ms-overflow-style: none;
+
 }
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
 ol, ul {
   list-style: none;
 }

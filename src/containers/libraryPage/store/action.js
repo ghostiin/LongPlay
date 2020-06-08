@@ -5,7 +5,7 @@ export const GET_RECOMMEND_ALBUMS = 'GET_RECOMMEND_ALBUMS';
 export const CHANGE_LOADING = 'CHANGE_LOADING';
 export const getRecommendList = () => {
 	const res = recommendList;
-	console.log('res', res);
+
 	return {
 		type: GET_RECOMMEND_ALBUMS,
 		payload: res

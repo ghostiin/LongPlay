@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import { getRecommendList } from './store/action';
 
 import { SecondStyle } from '../../theme/style';
-import downArrow from '../../assets/imgs/down-arrow.svg';
+
+import DownArrow from '../../components/UI/DownArrow';
 import { HorizonLine as Hr } from '../../theme/style';
 import SearchBox from '../../components/SearchBox';
 import Slider from '../../components/Slider';
@@ -21,7 +22,6 @@ const Wrapper = styled.div`
 	margin-top: 7rem;
 	padding-top: 5rem;
 	background-color: ${({ theme }) => theme.colors.bgColor};
-	position: relative;
 `;
 
 const Caption = styled.div`
@@ -52,7 +52,7 @@ const Library = ({ route, albums, loading: isLoading, getRecommendList }) => {
 			<SecondStyle />
 			{renderRoutes(route.routes)}
 			<Wrapper>
-				<img src={downArrow} alt="down-arrow" />
+				<DownArrow />
 				<Link to="/box">
 					<LinkButton>Back To My Box</LinkButton>
 				</Link>

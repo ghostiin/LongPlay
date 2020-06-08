@@ -1,0 +1,62 @@
+import React, { useEffect } from 'react';
+import _ from 'lodash';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import UpArrow from '../../components/UI/UpArrow';
+
+import HScroll from '../../components/Scroll';
+import Button from '../../components/UI/Button';
+const Wrapper = styled.div`
+	position: fixed;
+	height: 20rem;
+	width: 100vw;
+	bottom: 0;
+	left: 0;
+	background-color: ${({ theme }) => theme.colors.dark};
+	font-size: 1.6rem;
+	text-align: center;
+	padding: 2rem;
+`;
+const InitWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 2rem;
+	font-family: ${({ theme }) => theme.fonts.text.regular};
+`;
+
+const LinkButton = styled(Button)`
+	margin-top: 1.5rem;
+`;
+const BoxBar = ({ box }) => {
+	const renderInit = () => {
+		return (
+			<InitWrapper>
+				Your Box is Empty...
+				<Link to="/library">
+					<LinkButton>Pick Your First Album!</LinkButton>
+				</Link>
+			</InitWrapper>
+		);
+	};
+	const renderList = () => {
+		// return <HorizontalBar List={box} />;
+		return <HScroll list={box} />;
+	};
+	return (
+		<Wrapper>
+			<UpArrow />
+			{box && box.length ? renderList() : renderInit()}
+		</Wrapper>
+	);
+};
+
+const mapStateToProp = (state) => {
+	return {
+		box: _.values(state.box)
+	};
+};
+
+export default connect(mapStateToProp)(BoxBar);
