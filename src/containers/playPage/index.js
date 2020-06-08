@@ -37,7 +37,7 @@ const Play = ({
 			});
 			togPlayerOn(true);
 		},
-		[ currentIndex ]
+		[ currentIndex, playList ]
 	);
 
 	useEffect(

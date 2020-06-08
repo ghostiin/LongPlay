@@ -40,6 +40,7 @@ const HScroll = ({ list, setCurrentAlbum, setPlaylist, setCurrentIndex }) => {
 	});
 
 	const onClick = (id, album, songs) => {
+		console.log('fire');
 		setCurrentIdx(id);
 		setCurrentAlbum(album);
 		setPlaylist(songs);
