@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import UpArrow from '../../components/UI/UpArrow';
 
-import HScroll from '../../components/Scroll';
+import HScroll from '../../components/HScroll';
 import Button from '../../components/UI/Button';
 const Wrapper = styled.div`
 	position: fixed;
@@ -42,7 +42,6 @@ const BoxBar = ({ box }) => {
 		);
 	};
 	const renderList = () => {
-		// return <HorizontalBar List={box} />;
 		return <HScroll list={box} />;
 	};
 	return (

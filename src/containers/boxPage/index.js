@@ -33,7 +33,7 @@ const LinkButton = styled(Button)`
 `;
 
 const Box = ({ box, route }) => {
-	const albums = _.values(box);
+	const albums = _.map(_.values(box), 'album');
 	const Initial = () => {
 		return <InitialWrapper>Add Your First Album ↘</InitialWrapper>;
 	};

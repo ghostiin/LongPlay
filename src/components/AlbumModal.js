@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Modal from './UI/Modal';
 import Loadingv1 from './UI/Loading';
 import AlbumItem from './AlbumItem';
-
+import VScroll from './VScroll';
 const DetailWrapper = styled.div`
 	font-family: ${({ theme }) => theme.fonts.text};
 	font-size: 1.6rem;
@@ -48,16 +48,15 @@ const DetailWrapper = styled.div`
 				flex-direction: column;
 				overflow-x: auto;
 				text-align: right;
-
-				.song {
-					margin: 1rem;
-				}
 			}
 		}
 	}
 `;
 
 const AlbumModal = ({ onDismiss, detail }) => {
+	const renderList = (songs) => {
+		return <VScroll list={songs} onItemClick={() => {}} height="inherit" />;
+	};
 	const Detail = (detail) => {
 		if (!detail) {
 			return <div>No this Album</div>;
@@ -74,13 +73,7 @@ const AlbumModal = ({ onDismiss, detail }) => {
 							</div>
 							<div className="right">
 								<span>Songs</span>
-								{songs.map((song) => {
-									return (
-										<div className="song" key={song.id}>
-											{song.name}
-										</div>
-									);
-								})}
+								{renderList(songs)}
 							</div>
 						</div>
 					</div>

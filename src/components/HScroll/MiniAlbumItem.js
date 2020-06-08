@@ -35,7 +35,6 @@ const AlbumMsk = styled.div`
 
 	width: 10rem;
 	height: 10rem;
-	${({ show }) => (show ? `box-shadow:5px -5px 51px 12px rgba(120,62,222,0.3);` : '')};
 
 	&:hover {
 		cursor: pointer;

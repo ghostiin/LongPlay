@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import BScroll from 'better-scroll';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { setCurrentAlbum, setPlaylist, setCurrentIndex } from '../../containers/playPage/store/action';
 import MiniAlbumItem from './MiniAlbumItem';
 const HScrollWrapper = styled.div`
 	margin-top: 2rem;
@@ -13,7 +15,7 @@ const HScrollWrapper = styled.div`
 `;
 
 const InlineItem = styled.div`display: inline-block;`;
-const HScroll = ({ list }) => {
+const HScroll = ({ list, setCurrentAlbum, setPlaylist, setCurrentIndex }) => {
 	const [ hScroll, setHScroll ] = useState(null);
 	const [ currentIdx, setCurrentIdx ] = useState(0);
 	const scrollRef = useRef();
@@ -36,10 +38,18 @@ const HScroll = ({ list }) => {
 			hScroll.refresh();
 		}
 	});
+
+	const onClick = (id, album, songs) => {
+		setCurrentIdx(id);
+		setCurrentAlbum(album);
+		setPlaylist(songs);
+		setCurrentIndex(0);
+	};
 	const renderList = () => {
-		return list.map((album, id) => {
+		return list.map((res, id) => {
+			const { album, songs } = res;
 			return (
-				<InlineItem key={album.id} onClick={() => setCurrentIdx(id)}>
+				<InlineItem key={album.id} onClick={() => onClick(id, album, songs)}>
 					<MiniAlbumItem album={album} show={currentIdx === id ? true : false} />
 				</InlineItem>
 			);
@@ -52,4 +62,4 @@ const HScroll = ({ list }) => {
 	);
 };
 
-export default HScroll;
+export default connect(null, { setCurrentAlbum, setPlaylist, setCurrentIndex })(HScroll);

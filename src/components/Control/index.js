@@ -32,11 +32,11 @@ const Control = ({ resource, boxList, addAlbumToBox, removeAlbumFromBox }) => {
 	return (
 		<Wrapper>
 			<Button className="iconfont">&#xe9f9;</Button>
-			{!_.find(boxList, (e) => e.id === resource.id) ? (
+			{!_.find(boxList, (e) => e.album.id === resource.id) ? (
 				<Button
 					className="iconfont"
 					onClick={() => {
-						addAlbumToBox(resource);
+						addAlbumToBox(resource.id);
 					}}
 				>
 					&#xe69f;
