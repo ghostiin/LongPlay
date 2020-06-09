@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
-import { togPlayerOn, setPlaylist, setCurrentIndex, setCurrentSong } from './store/action';
+import { togPlayerOn, setPlaylist, setCurrentIndex, setCurrentSong, setCurrentAlbum } from './store/action';
 import { getSongAudio } from '../../api/request';
 import styled from 'styled-components';
 import { PlayerStyle } from '../../theme/style';
@@ -22,20 +23,29 @@ const Play = ({
 	playList,
 	currentIndex,
 	currentSong,
+	currentAlbum,
 	togPlayerOn,
 	setPlaylist,
+	setCurrentAlbum,
 	setCurrentIndex,
-	setCurrentSong
+	setCurrentSong,
+	box
 }) => {
 	const audioRef = useRef();
 	useEffect(
 		() => {
-			setCurrentSong(playList[currentIndex]);
-			audioRef.current.src = getSongAudio(playList[currentIndex].id);
-			setTimeout(() => {
-				audioRef.current.play();
-			});
-			togPlayerOn(true);
+			if (playList && playList.length) {
+				setCurrentSong(playList[currentIndex]);
+				audioRef.current.src = getSongAudio(playList[currentIndex].id);
+				setTimeout(() => {
+					audioRef.current.play();
+				});
+				togPlayerOn(true);
+			} else if (box && box.length) {
+				setPlaylist(box[0].songs);
+				setCurrentAlbum(box[0].album);
+				setCurrentIndex(0);
+			}
 		},
 		[ currentIndex, playList ]
 	);
@@ -51,6 +61,50 @@ const Play = ({
 		[ isPlayerOn ]
 	);
 
+	const playLoop = () => {
+		audioRef.current.currentTime = 0;
+		togPlayerOn(true);
+		audioRef.current.play();
+	};
+	const albumLoop = false;
+	const playNext = () => {
+		if (albumLoop || currentIndex + 1 !== playList.length) {
+			playNextSong();
+
+			return;
+		}
+		let id = _.findIndex(box, (e) => e.album.id === currentAlbum.id) + 1;
+		if (id === box.length) id = 0;
+		setPlaylist(box[id].songs);
+		setCurrentAlbum(box[id].album);
+		setCurrentIndex(0);
+	};
+	const playNextSong = () => {
+		if (playList.length === 1) {
+			playLoop();
+			return;
+		}
+		let idx = currentIndex + 1;
+		if (idx === playList.length) idx = 0;
+		if (!isPlayerOn) togPlayerOn(true);
+		setCurrentIndex(idx);
+	};
+
+	const playPrevSong = () => {
+		if (playList.length === 1) {
+			playLoop();
+			return;
+		}
+		let idx = currentIndex - 1;
+		if (idx < 0) idx = playList.length - 1;
+		if (!isPlayerOn) togPlayerOn(true);
+		setCurrentIndex(idx);
+	};
+	const onPlayEnd = () => {
+		console.log('end');
+		togPlayerOn(false);
+		playNext();
+	};
 	return (
 		<React.Fragment>
 			<PlayerStyle />
@@ -59,7 +113,7 @@ const Play = ({
 					<SongList />
 				</SideWrapper>
 				<CDPlayer />
-				<audio ref={audioRef} />
+				<audio ref={audioRef} onEnded={onPlayEnd} />
 				<SideWrapper>
 					<SongList />
 				</SideWrapper>
@@ -74,12 +128,15 @@ const mapStateToProps = (state) => {
 		isPlayerOn: state.player.isPlayerOn,
 		playList: state.player.playList,
 		currentIndex: state.player.currentIndex,
-		currentSong: state.player.currentSong
+		currentSong: state.player.currentSong,
+		currentAlbum: state.player.currentAlbum,
+		box: _.values(state.box)
 	};
 };
 export default connect(mapStateToProps, {
 	togPlayerOn,
 	setPlaylist,
 	setCurrentIndex,
-	setCurrentSong
+	setCurrentSong,
+	setCurrentAlbum
 })(Play);

@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import BScroll from 'better-scroll';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { setCurrentAlbum, setPlaylist, setCurrentIndex } from '../../containers/playPage/store/action';
+
 import MiniAlbumItem from './MiniAlbumItem';
 const HScrollWrapper = styled.div`
 	margin-top: 2rem;
@@ -15,9 +15,9 @@ const HScrollWrapper = styled.div`
 `;
 
 const InlineItem = styled.div`display: inline-block;`;
-const HScroll = ({ list, setCurrentAlbum, setPlaylist, setCurrentIndex }) => {
+const HScroll = ({ list, currentAlbumIdx, onClick }) => {
 	const [ hScroll, setHScroll ] = useState(null);
-	const [ currentIdx, setCurrentIdx ] = useState(0);
+
 	const scrollRef = useRef();
 	useEffect(() => {
 		const scroll = new BScroll(scrollRef.current, {
@@ -39,19 +39,15 @@ const HScroll = ({ list, setCurrentAlbum, setPlaylist, setCurrentIndex }) => {
 		}
 	});
 
-	const onClick = (id, album, songs) => {
-		console.log('fire');
-		setCurrentIdx(id);
-		setCurrentAlbum(album);
-		setPlaylist(songs);
-		setCurrentIndex(0);
-	};
 	const renderList = () => {
 		return list.map((res, id) => {
 			const { album, songs } = res;
 			return (
-				<InlineItem key={album.id} onClick={() => onClick(id, album, songs)}>
-					<MiniAlbumItem album={album} show={currentIdx === id ? true : false} />
+				<InlineItem key={album.id} onClick={() => onClick(album, songs)}>
+					<MiniAlbumItem
+						album={album}
+						show={currentAlbumIdx ? album.id === currentAlbumIdx ? true : false : id === 0 ? true : false}
+					/>
 				</InlineItem>
 			);
 		});
@@ -63,4 +59,11 @@ const HScroll = ({ list, setCurrentAlbum, setPlaylist, setCurrentIndex }) => {
 	);
 };
 
-export default connect(null, { setCurrentAlbum, setPlaylist, setCurrentIndex })(HScroll);
+const mapStateToProps = (state) => {
+	if (state.player.currentAlbum)
+		return {
+			currentAlbumIdx: state.player.currentAlbum.id
+		};
+};
+
+export default connect(mapStateToProps)(HScroll);

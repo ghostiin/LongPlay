@@ -3,8 +3,8 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { setCurrentAlbum, setPlaylist, setCurrentIndex } from '../../containers/playPage/store/action';
 import UpArrow from '../../components/UI/UpArrow';
-
 import HScroll from '../../components/HScroll';
 import Button from '../../components/UI/Button';
 const Wrapper = styled.div`
@@ -30,7 +30,12 @@ const InitWrapper = styled.div`
 const LinkButton = styled(Button)`
 	margin-top: 1.5rem;
 `;
-const BoxBar = ({ box }) => {
+const BoxBar = ({ box, setCurrentAlbum, setPlaylist, setCurrentIndex }) => {
+	const onClick = (album, songs) => {
+		setCurrentAlbum(album);
+		setPlaylist(songs);
+		setCurrentIndex(0);
+	};
 	const renderInit = () => {
 		return (
 			<InitWrapper>
@@ -42,7 +47,7 @@ const BoxBar = ({ box }) => {
 		);
 	};
 	const renderList = () => {
-		return <HScroll list={box} />;
+		return <HScroll list={box} onClick={onClick} />;
 	};
 	return (
 		<Wrapper>
@@ -58,4 +63,4 @@ const mapStateToProp = (state) => {
 	};
 };
 
-export default connect(mapStateToProp)(BoxBar);
+export default connect(mapStateToProp, { setCurrentAlbum, setPlaylist, setCurrentIndex })(BoxBar);
