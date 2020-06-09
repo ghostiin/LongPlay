@@ -1,6 +1,6 @@
 {
-  "id": "",
-  "name": "",
+  "id": "1874475",
+  "name": "LP",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
@@ -11,6 +11,27 @@
       "font_class": "pause",
       "unicode": "e63d",
       "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "431896",
+      "name": "next",
+      "font_class": "next",
+      "unicode": "e775",
+      "unicode_decimal": 59253
+    },
+    {
+      "icon_id": "431950",
+      "name": "previous",
+      "font_class": "previous",
+      "unicode": "e7a7",
+      "unicode_decimal": 59303
+    },
+    {
+      "icon_id": "490628",
+      "name": "skip_previous",
+      "font_class": "skipprevious",
+      "unicode": "ed09",
+      "unicode_decimal": 60681
     },
     {
       "icon_id": "703373",
@@ -32,6 +53,13 @@
       "font_class": "pause1",
       "unicode": "e6a6",
       "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "1410535",
+      "name": "skip-next",
+      "font_class": "skip-next",
+      "unicode": "e6d2",
+      "unicode_decimal": 59090
     },
     {
       "icon_id": "8106217",
@@ -85,7 +113,7 @@
     {
       "icon_id": "8106272",
       "name": "next",
-      "font_class": "next",
+      "font_class": "next1",
       "unicode": "e6a3",
       "unicode_decimal": 59043
     },

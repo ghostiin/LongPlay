@@ -5,7 +5,7 @@ const defaultState = {
 	currentAlbum: null,
 	playList: [],
 	currentIndex: -1,
-	currentSong: {}
+	currentSong: null
 };
 
 export default (state = defaultState, action) => {

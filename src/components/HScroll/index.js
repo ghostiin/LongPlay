@@ -64,6 +64,7 @@ const mapStateToProps = (state) => {
 		return {
 			currentAlbumIdx: state.player.currentAlbum.id
 		};
+	return {};
 };
 
 export default connect(mapStateToProps)(HScroll);

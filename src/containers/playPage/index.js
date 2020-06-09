@@ -32,19 +32,57 @@ const Play = ({
 	box
 }) => {
 	const audioRef = useRef();
+	const [ boxIdx, setBoxIdx ] = useState(0);
+	useEffect(() => {
+		if (_.findIndex(box, (e) => e.playNow) !== -1) {
+			const playNowId = _.findIndex(box, (e) => e.playNow);
+			box[playNowId].playNow = false;
+			setPlaylist(box[playNowId].songs);
+			setCurrentAlbum(box[playNowId].album);
+			setCurrentIndex(0);
+			setBoxIdx(playNowId);
+		}
+	}, []);
+	useEffect(
+		() => {
+			if (box) {
+				if (box.length === 0) {
+					setBoxIdx(0);
+					togPlayerOn(false);
+					setCurrentAlbum(null);
+					setPlaylist([]);
+					setCurrentIndex(-1);
+					setCurrentSong(null);
+					audioRef.current.src = '';
+				} else if (currentAlbum && _.findIndex(box, (e) => e.album.id === currentAlbum.id) === -1) {
+					let id = boxIdx;
+					setPlaylist(box[id].songs);
+					setCurrentAlbum(box[id].album);
+					setCurrentIndex(0);
+					setBoxIdx(id);
+				}
+			}
+		},
+		[ box.length ]
+	);
 	useEffect(
 		() => {
 			if (playList && playList.length) {
 				setCurrentSong(playList[currentIndex]);
+
 				audioRef.current.src = getSongAudio(playList[currentIndex].id);
-				setTimeout(() => {
-					audioRef.current.play();
-				});
+				setBoxIdx(_.findIndex(box, (e) => e.album.id === currentAlbum.id));
 				togPlayerOn(true);
+				if (isPlayerOn) {
+					setTimeout(() => {
+						audioRef.current.play();
+					});
+				}
 			} else if (box && box.length) {
 				setPlaylist(box[0].songs);
 				setCurrentAlbum(box[0].album);
 				setCurrentIndex(0);
+				setBoxIdx(0);
 			}
 		},
 		[ currentIndex, playList ]
@@ -52,7 +90,7 @@ const Play = ({
 
 	useEffect(
 		() => {
-			if (isPlayerOn) {
+			if (isPlayerOn && box.length) {
 				audioRef.current.play();
 			} else {
 				audioRef.current.pause();
@@ -70,7 +108,6 @@ const Play = ({
 	const playNext = () => {
 		if (albumLoop || currentIndex + 1 !== playList.length) {
 			playNextSong();
-
 			return;
 		}
 		let id = _.findIndex(box, (e) => e.album.id === currentAlbum.id) + 1;
@@ -78,6 +115,7 @@ const Play = ({
 		setPlaylist(box[id].songs);
 		setCurrentAlbum(box[id].album);
 		setCurrentIndex(0);
+		setBoxIdx(id);
 	};
 	const playNextSong = () => {
 		if (playList.length === 1) {
@@ -105,6 +143,21 @@ const Play = ({
 		togPlayerOn(false);
 		playNext();
 	};
+	const handleError = () => {
+		if (isPlayerOn) {
+			alert('err');
+		}
+	};
+
+	const onPrevClick = () => {
+		console.log('prev');
+		playPrevSong();
+	};
+
+	const onNextClick = () => {
+		console.log('next');
+		playNext();
+	};
 	return (
 		<React.Fragment>
 			<PlayerStyle />
@@ -112,8 +165,8 @@ const Play = ({
 				<SideWrapper>
 					<SongList />
 				</SideWrapper>
-				<CDPlayer />
-				<audio ref={audioRef} onEnded={onPlayEnd} />
+				<CDPlayer onPrevClick={onPrevClick} onNextClick={onNextClick} />
+				<audio ref={audioRef} onEnded={onPlayEnd} onError={handleError} />
 				<SideWrapper>
 					<SongList />
 				</SideWrapper>

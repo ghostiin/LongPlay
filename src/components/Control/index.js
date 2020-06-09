@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+
 import { addAlbumToBox, removeAlbumFromBox } from './store/action';
 import styled from 'styled-components';
 
@@ -31,7 +32,15 @@ const Button = styled.div`
 const Control = ({ resource, boxList, addAlbumToBox, removeAlbumFromBox }) => {
 	return (
 		<Wrapper>
-			<Button className="iconfont">&#xe9f9;</Button>
+			<Button
+				className="iconfont"
+				onClick={() => {
+					addAlbumToBox(resource.id, true);
+				}}
+			>
+				&#xe9f9;
+			</Button>
+
 			{!_.find(boxList, (e) => e.album.id === resource.id) ? (
 				<Button
 					className="iconfont"
@@ -63,4 +72,7 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { addAlbumToBox, removeAlbumFromBox })(Control);
+export default connect(mapStateToProps, {
+	addAlbumToBox,
+	removeAlbumFromBox
+})(Control);

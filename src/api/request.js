@@ -25,3 +25,7 @@ export const getSearchAlbums = (query, limit = 100) => {
 export const getSongAudio = (id) => {
 	return `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
 };
+
+export const getLyrics = (id) => {
+	return netease.get(`/lyric?id=${id}`);
+};
