@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Redirect } from 'react-router-dom';
 import Home from '../components/Home';
 import Intro from '../containers/introPage';
-import Play from '../containers/playPage';
-import Library from '../containers/libraryPage';
+// import Play from '../containers/playPage';
+// import Library from '../containers/libraryPage';
+// import Box from '../containers/boxPage';
+// import Search from '../containers/searchPage';
 import LibraryAlbumDetail from '../containers/libraryPage/AlbumDetail';
-import Search from '../containers/searchPage';
 import BoxAlbumDetail from '../containers/boxPage/AlbumDetail';
 import SearchAlbumDetail from '../containers/searchPage/AlbumDetail';
-import Box from '../containers/boxPage';
 
+const SuspenseComponent = (Component) => (props) => {
+	return (
+		<Suspense fallback={null}>
+			<Component {...props} />
+		</Suspense>
+	);
+};
+
+const PlayComponent = lazy(() => import('../containers/playPage'));
+const LibraryComponent = lazy(() => import('../containers/libraryPage'));
+const SearchComponent = lazy(() => import('../containers/searchPage'));
+const BoxComponent = lazy(() => import('../containers/boxPage'));
 export default [
 	{
 		path: '/',
@@ -26,11 +38,11 @@ export default [
 			},
 			{
 				path: '/play',
-				component: Play
+				component: SuspenseComponent(PlayComponent)
 			},
 			{
 				path: '/library',
-				component: Library,
+				component: SuspenseComponent(LibraryComponent),
 
 				routes: [
 					{
@@ -41,7 +53,7 @@ export default [
 			},
 			{
 				path: '/search',
-				component: Search,
+				component: SuspenseComponent(SearchComponent),
 				routes: [
 					{
 						path: '/search/:id',
@@ -52,7 +64,7 @@ export default [
 
 			{
 				path: '/box',
-				component: Box,
+				component: SuspenseComponent(BoxComponent),
 				routes: [
 					{
 						path: '/box/:id',
