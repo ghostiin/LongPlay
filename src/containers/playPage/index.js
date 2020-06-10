@@ -2,12 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { togPlayerOn, setPlaylist, setCurrentIndex, setCurrentSong, setCurrentAlbum } from './store/action';
-import { getSongAudio } from '../../api/request';
+import { getSongAudio, getLyrics } from '../../api/request';
+import Lyric from '../../api/lyric-parser';
 import styled from 'styled-components';
 import { PlayerStyle } from '../../theme/style';
 import BoxBar from './BoxBar';
 import CDPlayer from '../../components/CDPlayer';
 import SongList from './SongList';
+import SongLyrics from './SongLyrics';
 const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
@@ -16,7 +18,13 @@ const Wrapper = styled.div`
 	align-items: center;
 	flex-direction: row;
 `;
-const SideWrapper = styled.div`flex-grow: 1;`;
+const SideWrapper = styled.div`
+	width: 30%;
+	flex-grow: 1;
+`;
+const RightWrapper = styled(SideWrapper)`
+text-align:right;
+`;
 
 const Play = ({
 	isPlayerOn,
@@ -33,6 +41,10 @@ const Play = ({
 }) => {
 	const audioRef = useRef();
 	const [ boxIdx, setBoxIdx ] = useState(0);
+	const [ currentTime, setCurrentTime ] = useState(0);
+	const lyricsRef = useRef();
+	const [ currentPlayingLyric, setPlayingLyric ] = useState(''); //即时歌词
+	const currentLineNum = useRef(0); //当前行数
 	useEffect(() => {
 		if (_.findIndex(box, (e) => e.playNow) !== -1) {
 			const playNowId = _.findIndex(box, (e) => e.playNow);
@@ -78,6 +90,8 @@ const Play = ({
 						audioRef.current.play();
 					});
 				}
+				getSongLyrics(playList[currentIndex].id);
+				setCurrentTime(0);
 			} else if (box && box.length) {
 				setPlaylist(box[0].songs);
 				setCurrentAlbum(box[0].album);
@@ -92,13 +106,48 @@ const Play = ({
 		() => {
 			if (isPlayerOn && box.length) {
 				audioRef.current.play();
+				if (lyricsRef.current) {
+					lyricsRef.current.togglePlay(currentTime * 1000);
+				}
 			} else {
 				audioRef.current.pause();
+				if (lyricsRef.current) {
+					lyricsRef.current.togglePlay(currentTime * 1000);
+				}
 			}
 		},
 		[ isPlayerOn ]
 	);
 
+	const updateTime = (e) => {
+		setCurrentTime(e.target.currentTime);
+	};
+	const handleLyric = ({ lineNum, txt }) => {
+		if (!lyricsRef.current) return;
+		currentLineNum.current = lineNum;
+		setPlayingLyric(txt);
+	};
+
+	const getSongLyrics = async (id) => {
+		let lyric = '';
+		let tlyric = '';
+		try {
+			const alyric = await getLyrics(id);
+			if (!alyric.lrc) {
+				lyricsRef.current = null;
+				return;
+			}
+			lyric = alyric.lrc.lyric;
+			tlyric = alyric.tlyric;
+
+			lyricsRef.current = new Lyric(lyric, handleLyric);
+			lyricsRef.current.play();
+			currentLineNum.current = 0;
+			lyricsRef.current.seek(0);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	const playLoop = () => {
 		audioRef.current.currentTime = 0;
 		togPlayerOn(true);
@@ -166,10 +215,17 @@ const Play = ({
 					<SongList />
 				</SideWrapper>
 				<CDPlayer onPrevClick={onPrevClick} onNextClick={onNextClick} />
-				<audio ref={audioRef} onEnded={onPlayEnd} onError={handleError} />
-				<SideWrapper>
-					<SongList />
-				</SideWrapper>
+				<audio ref={audioRef} onEnded={onPlayEnd} onError={handleError} onTimeUpdate={updateTime} />
+				<RightWrapper>
+					<SongLyrics
+						song={currentSong}
+						album={currentAlbum}
+						currentTime={currentTime}
+						currentLyric={lyricsRef.current}
+						currentPlayingLyric={currentPlayingLyric}
+						currentLineNum={currentLineNum.current}
+					/>
+				</RightWrapper>
 			</Wrapper>
 			<BoxBar />
 		</React.Fragment>

@@ -28,7 +28,8 @@ const CheckItemWrapper = styled.div`
 	cursor: default;
 `;
 
-const VScroll = ({ list, currentIndex, onItemClick }) => {
+const VScroll = (props) => {
+	const { list, currentIndex, onItemClick } = props;
 	const [ vScroll, setVScroll ] = useState(null);
 
 	const scrollRef = useRef();
@@ -65,11 +66,7 @@ const VScroll = ({ list, currentIndex, onItemClick }) => {
 			}
 		});
 	};
-	return (
-		<VScrollWrapper ref={scrollRef}>
-			<div>{renderList()}</div>
-		</VScrollWrapper>
-	);
+	return <VScrollWrapper ref={scrollRef}>{list ? <div>{renderList()}</div> : props.children}</VScrollWrapper>;
 };
 
 export default VScroll;
