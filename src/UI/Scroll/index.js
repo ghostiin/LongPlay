@@ -88,7 +88,6 @@ const Scroll = forwardRef((props, ref) => {
 		}
 	}));
 
-	console.log('children', props.children);
 	return <ScrollInnerWrapper ref={wrapperRef}>{props.children}</ScrollInnerWrapper>;
 });
 
@@ -107,7 +106,7 @@ Scroll.propTypes = {
 };
 
 Scroll.defaultProps = {
-	direction: 'horizontal',
+	direction: 'vertical',
 	mouseWheel: true,
 	click: true,
 	refresh: true,

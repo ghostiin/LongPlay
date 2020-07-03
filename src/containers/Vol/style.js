@@ -5,9 +5,13 @@ const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-top: 6rem;
+	padding-top: 3rem;
 	font-family: ${style.sansFont};
 	color: ${style.textColor};
 `;
 
-export default Wrapper;
+const Content = styled.div`${style.scrollHContent};`;
+
+const Item = styled.div`padding: 3rem;`;
+
+export { Wrapper, Content, Item };

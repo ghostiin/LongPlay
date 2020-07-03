@@ -2,11 +2,23 @@ import 'typeface-libre-barcode-39-text'; // 引入本地字体
 import 'typeface-lora';
 import 'typeface-poppins';
 
+// 一行显示不下则省略号
 const noWrap = () => `
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
 	`;
+
+// 一行显示不下则换行，不强制打断单词除非一行显示不了一个单词
+const overflowWrap = () => `
+word-break:keep-all;
+word-wrap: break-word;
+
+`;
+
+const scrollHContent = () => `
+	display:inline-box;
+`;
 
 export default {
 	bgColorLight: '#9377D2',
@@ -20,5 +32,7 @@ export default {
 	sansFont: `'Poppins', sans-serif`,
 	seridFont: `'Lora', serif`,
 	logoFont: `'MuseoModerno-Bold', cursive`,
-	noWrap
+	noWrap,
+	overflowWrap,
+	scrollHContent
 };

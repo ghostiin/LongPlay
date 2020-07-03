@@ -4,8 +4,8 @@ import CardWrapper from './style';
 
 // 使用Card
 /* <Card>
-	<div className='front'>...</div>
-	<div className='back'>...</div>
+	<div className='side front'>...</div>
+	<div className='side back'>...</div>
 </Card>; */
 
 const Card = (props) => {
