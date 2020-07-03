@@ -17,7 +17,19 @@ module.exports = {
 		'react/jsx-filename-extension': [ 1, { extensions: [ '.js', '.jsx' ] } ],
 		'no-console': 'off',
 		'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
-		'react-hooks/exhaustive-deps': 'warn' // 检查 effect 的依赖
+		'react-hooks/exhaustive-deps': 'warn', // 检查 effect 的依赖
+		'no-restricted-imports': [
+			'error',
+			{
+				paths: [
+					{
+						name: 'styled-components',
+						message: 'Please import from styled-components/macro.'
+					}
+				],
+				patterns: [ '!styled-components/macro' ]
+			}
+		]
 	},
 	settings: {
 		react: {
