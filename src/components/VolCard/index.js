@@ -4,6 +4,7 @@ import Card from '../../UI/Card';
 import Scroll from '../../UI/Scroll';
 import Button from '../../UI/Button';
 import style from '../../theme';
+import Marquee from '../../UI/Marquee';
 import defaultImg from './defaultCover.svg';
 import { CoverImg, CardInfo, CardDescription, CardAction, Nameplate } from './style';
 
@@ -17,7 +18,11 @@ const VolCard = (props) => {
 				</CoverImg>
 				<CardInfo>
 					<div className='category'>{cardCatgory}</div>
-					<div className='name'>{cardName}</div>
+
+					<Marquee className='name' style={{ fontSize: '1.8rem', fontWeight: '600' }}>
+						{cardName}
+					</Marquee>
+
 					<div className='singer'>
 						<span>By</span>
 						{singerName}
@@ -27,9 +32,12 @@ const VolCard = (props) => {
 			<div className='side side--back'>
 				<CardInfo small>
 					<img src={imgUrl} alt='cover' />
+
 					<div className='right'>
 						<div className='category'>{cardCatgory}</div>
-						<div className='name'>{cardName}</div>
+						<Marquee className='name' style={{ fontSize: '1.2rem', fontWeight: '600', width: '12rem' }}>
+							{cardName}
+						</Marquee>
 						<div className='singer'>
 							<span>By</span>
 							{singerName}

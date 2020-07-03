@@ -17,6 +17,7 @@ const Scroll = forwardRef((props, ref) => {
 			scrollX: direction === 'horizontal', // 如果direction = h 设为true
 			scrollY: direction === 'vertical', // 如果direction =v 设为true
 			probeType: 3, // 实时派发scroll事件
+			// disableMouse: false, // to-do 可触屏PC怎么办
 			click, // 开启点击
 			mouseWheel // 开启鼠标滑轮
 		});

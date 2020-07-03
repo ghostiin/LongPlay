@@ -13,11 +13,18 @@ const noWrap = () => `
 const overflowWrap = () => `
 word-break:keep-all;
 word-wrap: break-word;
-
 `;
 
 const scrollHContent = () => `
 	display:inline-box;
+`;
+
+const moreWrap = () => `
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
 `;
 
 export default {
@@ -33,6 +40,7 @@ export default {
 	seridFont: `'Lora', serif`,
 	logoFont: `'MuseoModerno-Bold', cursive`,
 	noWrap,
+	moreWrap,
 	overflowWrap,
 	scrollHContent
 };

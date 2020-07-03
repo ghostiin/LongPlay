@@ -30,12 +30,13 @@ const CardInfo = styled.div`
 	}
 	.name {
 		font-weight: 600;
-		font-size: ${({ small }) => (small ? '1.8rem' : '1.8em')};
+		font-size: ${({ small }) => (small ? '1.2rem' : '1.8em')};
 		${({ small }) => {
-			if (small) return `${style.overflowWrap}`;
-			return `${style.noWrap}`;
+			if (small) {
+				return style.moreWrap();
+			}
+			return style.noWrap();
 		}};
-		width: 100%;
 	}
 	.singer {
 		span {
@@ -52,13 +53,16 @@ const CardInfo = styled.div`
 		border-radius: 0.5rem;
 	}
 	.right {
-		padding-left: 1rem;
+		flex: 1;
+		width: 12rem;
+		/* padding-left: 1rem; */
+		margin-left: 1rem;
 	}
 `;
 
 const CardDescription = styled.div`
 	padding: 2rem;
-	height: 12rem;
+	height: 15rem;
 	.text {
 		height: 50%;
 	}
@@ -69,8 +73,6 @@ const CardAction = styled.div`
 	font-weight: 300;
 	display: flex;
 	justify-content: space-between;
-	position: absolute;
-	bottom: 4rem;
 	width: 100%;
 `;
 
@@ -78,8 +80,7 @@ const Nameplate = styled.div`
 	font-family: ${style.specialFont};
 	text-align: center;
 	padding-top: 1.5rem;
-	position: absolute;
-	bottom: 1rem;
+
 	width: 100%;
 `;
 

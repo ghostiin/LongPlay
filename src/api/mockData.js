@@ -1,5 +1,5 @@
 const volAlbum1 = {
-	name: 'Do I Wanna Know?',
+	name: 'Divinely dynamicX do I wNNAM',
 	id: 2521670,
 	type: 'EP/Single',
 	size: 2,
