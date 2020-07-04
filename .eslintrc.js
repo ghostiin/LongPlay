@@ -29,7 +29,8 @@ module.exports = {
 				],
 				patterns: [ '!styled-components/macro' ]
 			}
-		]
+		],
+		'no-unused-vars': [ 'error', { argsIgnorePattern: 'draft' } ] // for use-immer
 	},
 	settings: {
 		react: {

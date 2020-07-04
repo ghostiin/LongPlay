@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes, { object } from 'prop-types';
+import PropTypes from 'prop-types';
 import VolCard from '../../components/VolCard';
 import Scroll from '../../UI/Scroll';
 import { Wrapper, Content, Item } from './style';
-import { volData2 as volData } from '../../api/mockData';
+import { volData } from '../../api/mockData';
 
+// eslint-disable-next-line no-shadow
 function Vol({ volData }) {
 	const renderList = () => {
 		return volData.map((vol) => {

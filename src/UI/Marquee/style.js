@@ -6,7 +6,7 @@ const Wrapper = styled.div`overflow: hidden;`;
 const TextWrapper = styled.div`
 	white-space: nowrap;
 	will-change: transform;
-	/* animation-name: dynamicMarqueeAnimation${({ x }) => x}; */
+
 	animation-name: dynamicMarqueeAnimation${({ x }) => x};
 	animation-play-state: ${({ animationPlayState }) => animationPlayState};
 	animation-duration: ${({ animationDuration }) => animationDuration};
@@ -14,6 +14,7 @@ const TextWrapper = styled.div`
 	animation-iteration-count: infinite;
 
 	${({ x }) => (x ? dynamicMarqueeAnimation(x) : '')};
+	/* x=0时说明不需要动画 */
 `;
 
 const TextElem = styled.div`

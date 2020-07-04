@@ -1,17 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useImmer } from 'use-immer';
+import { nothing } from 'immer'; // nothing === undefined
 
 // 控制animation-play-state
 // example: 监听鼠标相关事件，返回触发的animation-play-state
 const useAnimationPlayState = () => {
 	const textWrapper = useRef(null);
-	const [ animationPlayState, setAnimationPlayState ] = useState(undefined);
-
+	// const [ animationPlayState, setAnimationPlayState ] = useState(undefined);
+	const [ animationPlayState, setAnimationPlayState ] = useImmer(nothing);
 	useEffect(() => {
 		const mouseOutHandler = function() {
-			setAnimationPlayState('running');
+			setAnimationPlayState((draft) => {
+				return 'running';
+			});
 		};
 		const mouseInHandler = function() {
-			setAnimationPlayState('paused');
+			setAnimationPlayState((draft) => {
+				return 'paused';
+			});
 		};
 		textWrapper.current.addEventListener('mouseenter', mouseInHandler);
 		textWrapper.current.addEventListener('mouseleave', mouseOutHandler);
@@ -27,7 +33,7 @@ const useAnimationPlayState = () => {
 const useAnimationDuration = (speed) => {
 	const textElem = useRef(null);
 	const calcElem = useRef(null);
-	const [ animationDuration, setAnimationDuration ] = useState(undefined);
+	const [ animationDuration, setAnimationDuration ] = useImmer(nothing);
 	const dynamicX = useRef(0);
 
 	useEffect(
@@ -39,12 +45,14 @@ const useAnimationDuration = (speed) => {
 					const textElemWidth = textElem.current.clientWidth;
 					const width = textElemWidth + 40;
 					dynamicX.current = `-${width}px`; // dynamicMarqueeAnimation的 DYNAMIC_VALUE值
-					setAnimationDuration(`${width * 20 / marqueeSpeed}ms`);
+					setAnimationDuration((draft) => {
+						return `${width * 20 / marqueeSpeed}ms`;
+					});
 				}
-				console.log(textElem.current.clientWidth, textElem.current.scrollWidth, calcElem.current.clientWidth);
+				// console.log(textElem.current.clientWidth, textElem.current.scrollWidth, calcElem.current.clientWidth);
 			};
 			marqueeRun();
-			window.addEventListener('resize', marqueeRun);
+			window.addEventListener('resize', marqueeRun); // 窗口大小变化时重新计算
 			return () => {
 				window.removeEventListener('resize', marqueeRun);
 			};

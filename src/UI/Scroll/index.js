@@ -1,12 +1,13 @@
-import React, { forwardRef, useEffect, useState, useRef, useImperativeHandle } from 'react';
-// import { useImmer } from 'use-immer';
+import React, { forwardRef, useEffect, useRef, useImperativeHandle } from 'react';
+import { useImmer } from 'use-immer';
 import PropTypes from 'prop-types';
 import BScroll from 'better-scroll';
 import ScrollInnerWrapper from './style';
 
 const Scroll = forwardRef((props, ref) => {
 	// 存放better-scroll的Bscroll实例
-	const [ bScroll, setBscroll ] = useState();
+	// const [ bScroll, setBscroll ] = useState();
+	const [ bScroll, setBscroll ] = useImmer();
 	// 指向Wrapper的dom
 	const wrapperRef = useRef();
 	const { direction, mouseWheel, click, refresh } = props; // value
@@ -21,10 +22,15 @@ const Scroll = forwardRef((props, ref) => {
 			click, // 开启点击
 			mouseWheel // 开启鼠标滑轮
 		});
-		setBscroll(scroll);
+		// setBscroll(scroll);
+		setBscroll((draft) => {
+			return scroll;
+		});
 		return () => {
 			// 退出时删除实例
-			setBscroll(null);
+			setBscroll((draft) => {
+				return null;
+			});
 		};
 	}, []);
 
