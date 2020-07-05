@@ -1,10 +1,15 @@
 import { createGlobalStyle } from 'styled-components/macro';
+import style from './index';
 
 const ResetStyle = createGlobalStyle`
     html {
     box-sizing: border-box;
     font-size: 16px;
     
+    }
+
+    html{
+    background: linear-gradient(${style.bgColorLight}, ${style.bgColorDark}) no-repeat fixed;
     }
 
     *, *:before, *:after {

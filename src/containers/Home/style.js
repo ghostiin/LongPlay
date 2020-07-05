@@ -2,11 +2,7 @@ import styled from 'styled-components/macro';
 import style from '../../theme';
 
 // 设置全屏背景色
-const Wrapper = styled.div`
-	background: linear-gradient(${style.bgColorLight}, ${style.bgColorDark});
-	width: 100vw;
-	height: 100vh;
-`;
+const Wrapper = styled.div``;
 
 const Header = styled.div`
 	display: flex;

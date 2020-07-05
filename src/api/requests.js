@@ -7,7 +7,7 @@ import musicApi from './config';
 // 接口地址 : /top/album
 // 调用例子 : /top/album?offset=0&limit=30
 
-const getNewAlbums = (offset = 0, limit = 36) => {
+const getNewAlbums = (offset = 0, limit = 30) => {
 	return musicApi.get(`/top/album?limit=${limit}&offset=${offset}`);
 };
 

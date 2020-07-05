@@ -18,6 +18,7 @@ module.exports = {
 		'no-console': 'off',
 		'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
 		'react-hooks/exhaustive-deps': 'warn', // 检查 effect 的依赖
+		'react/jsx-fragments': [ 'error', 'element' ],
 		'no-restricted-imports': [
 			'error',
 			{
@@ -30,7 +31,8 @@ module.exports = {
 				patterns: [ '!styled-components/macro' ]
 			}
 		],
-		'no-unused-vars': [ 'error', { argsIgnorePattern: 'draft' } ] // for use-immer
+		'no-unused-vars': [ 'error', { argsIgnorePattern: 'draft' } ], // for use-immer
+		'no-param-reassign': [ 'error', { props: false } ]
 	},
 	settings: {
 		react: {
