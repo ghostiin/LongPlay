@@ -31,6 +31,7 @@ export default {
 	bgColorLight: '#9377D2',
 	bgColorDark: '#432D77',
 	mainColor: '#783EDE',
+	secondaryColor: '#594190',
 	darkColor: '#18141A',
 	textColor: '#fff',
 	subColor: 'rgba(255,255,255,0.5)',

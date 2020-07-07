@@ -9,12 +9,12 @@ const useAnimationPlayState = () => {
 	// const [ animationPlayState, setAnimationPlayState ] = useState(undefined);
 	const [ animationPlayState, setAnimationPlayState ] = useImmer(nothing);
 	useEffect(() => {
-		const mouseOutHandler = function() {
+		const mouseOutHandler = () => {
 			setAnimationPlayState((draft) => {
 				return 'running';
 			});
 		};
-		const mouseInHandler = function() {
+		const mouseInHandler = () => {
 			setAnimationPlayState((draft) => {
 				return 'paused';
 			});
@@ -57,7 +57,7 @@ const useAnimationDuration = (speed) => {
 				window.removeEventListener('resize', marqueeRun);
 			};
 		},
-		[ speed ]
+		[ speed, setAnimationDuration ]
 	);
 
 	return { textElem, calcElem, dynamicX, animationDuration };

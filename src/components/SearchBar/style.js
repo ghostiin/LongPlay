@@ -13,7 +13,7 @@ const InputWrapper = styled.div`
 		width: 30rem;
 		height: 2rem;
 		padding: 1rem 2rem;
-		background-color: rgba(88, 71, 126, .5);
+		background-color: ${({ bgColor }) => bgColor || 'rgba(88, 71, 126, .5)'};
 		text-align: center;
 		&::-webkit-input-placeholder {
 			font-family: ${style.sansFont};

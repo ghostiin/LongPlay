@@ -36,7 +36,7 @@ const searchAlbums = (query) => async (dispatch) => {
 		type: SEARCH_ALBUMS,
 		payload: normalizeData
 	});
-	dispatch({ type: SEARCH_LOADING });
+	dispatch({ type: SEARCH_LOADING, payload: false });
 };
 
 const toggleLoading = () => ({

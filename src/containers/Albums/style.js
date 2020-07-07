@@ -69,6 +69,58 @@ const GridItem = styled.div`
 	}
 `;
 
-const SearchBox = styled.div`margin: 3rem 0;`;
+const Logo = styled.div`
+	font-family: ${style.logoFont};
+	font-size: 2rem;
+	span {
+		margin-right: 2.5rem;
+	}
+`;
 
-export { Wrapper, GridContainer, GridItem, Caption, SearchBox };
+const NavBar = styled.div`
+	text-align: center;
+	color: ${style.textColor};
+	font-size: 1rem;
+	font-family: ${style.sansFont};
+	a {
+		text-decoration: none;
+		color: ${style.textColor};
+		opacity: 0.5;
+	}
+
+	.selected {
+		position: relative;
+		opacity: 1;
+		font-size: 1.5rem;
+		transition: all .4s;
+		&:after {
+			content: '♫';
+			font-size: 1rem;
+			color: ${style.textColor};
+			position: absolute;
+			top: 120%;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+`;
+
+const NavItem = styled.div`
+	display: inline-block;
+	position: relative;
+	margin-right: 4rem;
+
+	&:not(:last-child):after {
+		content: "";
+		background-color: ${style.textColor};
+		position: absolute;
+		width: 3rem;
+		height: 1px;
+		left: 125%;
+		top: 50%;
+	}
+`;
+
+const SearchBox = styled.div`text-align: center;`;
+
+export { Wrapper, GridContainer, GridItem, Caption, SearchBox, Logo, NavBar, NavItem };

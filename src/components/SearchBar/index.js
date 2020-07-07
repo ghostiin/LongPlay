@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { InputWrapper } from './style';
 import { useDebounce } from '../../hooks';
 
-const SearchBar = ({ handleQuery }) => {
+const SearchBar = ({ handleQuery, style }) => {
 	const [ query, setQuery ] = useState('');
 	const inputEl = useRef();
 	useEffect(() => {
@@ -34,6 +34,7 @@ const SearchBar = ({ handleQuery }) => {
 				onChange={onInputChange}
 				value={query}
 				placeholder='&#xe6e1; SEARCH FOR ALBUMS'
+				style={style}
 			/>
 			<i
 				className='iconfont'
@@ -48,11 +49,15 @@ const SearchBar = ({ handleQuery }) => {
 };
 
 SearchBar.propTypes = {
-	handleQuery: PropTypes.func
+	handleQuery: PropTypes.func,
+	style: PropTypes.shape({
+		backgroundColor: PropTypes.string
+	})
 };
 
 SearchBar.defaultProps = {
-	handleQuery: () => {}
+	handleQuery: () => {},
+	style: {}
 };
 
 export default React.memo(SearchBar);

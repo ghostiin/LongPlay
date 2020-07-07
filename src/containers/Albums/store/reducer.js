@@ -41,7 +41,11 @@ const reducer = (state = defaultState, action) =>
 				draftState.enterLoading = action.payload;
 				return draftState;
 			case SEARCH_LOADING:
-				draftState.searchLoading = !draftState.searchLoading;
+				if (action.payload !== undefined) {
+					draftState.searchLoading = action.payload;
+				} else {
+					draftState.searchLoading = !draftState.searchLoading;
+				}
 				return draftState;
 			default:
 				return draftState;

@@ -5,9 +5,8 @@ const ResetStyle = createGlobalStyle`
     html {
     box-sizing: border-box;
     font-size: 16px;
-    
     }
-
+    /* 自定义 */
     html{
     background: linear-gradient(${style.bgColorLight}, ${style.bgColorDark}) no-repeat fixed;
     }
@@ -20,6 +19,7 @@ const ResetStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-weight: normal;
+    overflow:auto;
     }
 
     ol, ul {

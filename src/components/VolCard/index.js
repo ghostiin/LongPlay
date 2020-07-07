@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
 import Card from '../../UI/Card';
 import Scroll from '../../UI/Scroll';
 import Button from '../../UI/Button';
@@ -14,7 +15,9 @@ const VolCard = (props) => {
 		<Card>
 			<div className='side side--front'>
 				<CoverImg>
-					<img src={imgUrl} alt='cover' />
+					<LazyLoad placeholder={<img src={defaultImg} alt='cover' />}>
+						<img src={`${imgUrl}?param=360x360`} alt='cover' />
+					</LazyLoad>
 				</CoverImg>
 				<CardInfo>
 					<div className='category'>{cardCatgory}</div>
@@ -31,8 +34,9 @@ const VolCard = (props) => {
 			</div>
 			<div className='side side--back'>
 				<CardInfo small>
-					<img src={imgUrl} alt='cover' />
-
+					<LazyLoad placeholder={<img src={defaultImg} alt='cover' />}>
+						<img src={`${imgUrl}?param=96x96`} alt='cover' />
+					</LazyLoad>
 					<div className='right'>
 						<div className='category'>{cardCatgory}</div>
 						<Marquee className='name' style={{ fontSize: '1.2rem', fontWeight: '600', width: '12rem' }}>
