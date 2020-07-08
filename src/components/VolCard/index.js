@@ -35,7 +35,7 @@ const VolCard = (props) => {
 			<div className='side side--back'>
 				<CardInfo small>
 					<LazyLoad placeholder={<img src={defaultImg} alt='cover' />}>
-						<img src={`${imgUrl}?param=96x96`} alt='cover' />
+						<img src={`${imgUrl}?param=360x360`} alt='cover' />
 					</LazyLoad>
 					<div className='right'>
 						<div className='category'>{cardCatgory}</div>

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Home from '../containers/Home';
 import Vol from '../containers/Vol';
 import Albums from '../containers/Albums';
+import AlbumDetail from '../containers/Albums/AlbumDetail';
 import Zen from '../containers/Zen';
 
 export default [
@@ -17,9 +18,16 @@ export default [
 				path: '/vol',
 				component: Vol
 			},
+
 			{
 				path: '/albums',
-				component: Albums
+				component: Albums,
+				routes: [
+					{
+						path: '/albums/:id',
+						component: AlbumDetail
+					}
+				]
 			},
 			{
 				path: '/',

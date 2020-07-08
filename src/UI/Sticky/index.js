@@ -6,7 +6,6 @@ const Sticky = ({ children }) => {
 	const [ fixed, setFixed ] = useState(false);
 	const stickyRef = useRef();
 	const fixedRef = useRef();
-	console.log(children);
 	useEffect(() => {
 		const distance = stickyRef.current.offsetTop;
 		const scrollCallBack = () => {
@@ -26,17 +25,17 @@ const Sticky = ({ children }) => {
 
 	return (
 		<StickyWrapper ref={stickyRef} shouldFixed={fixed}>
-			<Wrapper ref={fixedRef}>{children}</Wrapper>
+			<Wrapper ref={fixedRef}>{children(fixed)}</Wrapper>
 		</StickyWrapper>
 	);
 };
 
 Sticky.propTypes = {
-	children: PropTypes.node
+	children: PropTypes.func
 };
 
 Sticky.defaultProps = {
-	children: null
+	children: () => {}
 };
 
 export default Sticky;

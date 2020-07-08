@@ -4,6 +4,7 @@ import style from '../../theme';
 const InputWrapper = styled.div`
 	padding-top: 1rem;
 	position: relative;
+	text-align: center;
 	input {
 		font-family: ${style.sansFont} !important;
 		color: ${style.textColor};
@@ -16,14 +17,12 @@ const InputWrapper = styled.div`
 		background-color: ${({ bgColor }) => bgColor || 'rgba(88, 71, 126, .5)'};
 		text-align: center;
 		&::-webkit-input-placeholder {
-			font-family: ${style.sansFont};
 			color: ${style.subColor};
 			text-align: center;
 			font-family: "iconfont" !important;
 		}
 
 		&::-moz-placeholder {
-			font-family: ${style.sansFont};
 			color: ${style.subColor};
 			text-align: center;
 			font-family: "iconfont" !important;
@@ -33,7 +32,9 @@ const InputWrapper = styled.div`
 	i {
 		position: absolute;
 		top: 50%;
-		right: 1rem;
+		right: 50%;
+		/* translateX half of search input width -1rem */
+		transform: translateX(14rem);
 		cursor: pointer;
 	}
 `;

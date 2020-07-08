@@ -1,18 +1,19 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LazyLoad from 'react-lazyload';
-import { NavLink } from 'react-router-dom';
-import { Wrapper, GridContainer, GridItem, Caption, SearchBox, Logo, NavBar, NavItem } from './style';
+import PropTypes from 'prop-types';
+import { renderRoutes } from 'react-router-config';
+import { NavLink, Link } from 'react-router-dom';
+import { Wrapper, GridContainer, GridItem, Caption, SearchBox, Logo, NavBar, NavItem, BackTop } from './style';
 import Media from '../../components/MediaQueries';
 import SearchBar from '../../components/SearchBar';
 import * as actionTypes from './store/action';
 import defaultCover from './default-cover.svg';
 import WaveLoading from '../../UI/WaveLoading';
 import Sticky from '../../UI/Sticky';
-import MiniNav from '../../components/MiniNav';
 import logo from './logo.svg';
 
-function Albums() {
+function Albums({ route }) {
 	const { newAlbumsList, newAlbumsId, searchAlbumsList, searchAlbumsId, searchLoading, enterLoading } = useSelector(
 		(state) => state.albums
 	);
@@ -37,7 +38,6 @@ function Albums() {
 			if (query.length) {
 				dispatch(actionTypes.searchAlbums(query));
 			}
-			dispatch(actionTypes.toggleLoading());
 		},
 		[ query, dispatch ]
 	);
@@ -47,10 +47,18 @@ function Albums() {
 			const item = list[id.toString()];
 			return (
 				<GridItem key={id.toString()}>
-					<LazyLoad placeholder={<img src={defaultCover} alt='default' />}>
-						<img src={`${item.picUrl}?param=210x210`} alt={item.name} />
-					</LazyLoad>
-					<p>{item.name}</p>
+					<div className='cover'>
+						<LazyLoad placeholder={<img src={defaultCover} alt='default' />}>
+							<img src={`${item.picUrl}?param=310x310`} alt={item.name} />
+						</LazyLoad>
+						<div className='msk'>
+							<i className='iconfont'>&#xe600;</i>
+							<i className='iconfont'>&#xea00;</i>
+						</div>
+					</div>
+					<p>
+						<Link to={`/albums/${id.toString()}`}>{item.name}</Link>
+					</p>
 					<p>
 						<span>By </span>
 						{item.artist.name}
@@ -76,16 +84,19 @@ function Albums() {
 	const renderNewAlbumsList = () => renderTemplate('THE NEWEST ALBUMS', newAlbumsId, newAlbumsList);
 	const renderSearchResult = () => renderTemplate('ONLY FOR ALBUMS', searchAlbumsId, searchAlbumsList);
 
-	return (
-		<Wrapper>
-			<Sticky>
-				<Logo>
+	const renderSticky = (fixed) => {
+		return (
+			<React.Fragment>
+				<BackTop onClick={() => window.scrollTo(0, 0)} style={fixed ? {} : { display: 'none' }}>
+					<i className='iconfont'>&#xe6a2;</i>back
+				</BackTop>
+				<Logo style={fixed ? {} : { display: 'none' }}>
 					<span>
 						<img src={logo} alt='Long Play Logo' />
 					</span>
 					LONG PLAY
 				</Logo>
-				<NavBar>
+				<NavBar style={fixed ? {} : { display: 'none' }}>
 					<NavItem>
 						<NavLink to='/vol' activeClassName='selected'>
 							Vol
@@ -98,14 +109,31 @@ function Albums() {
 					</NavItem>
 				</NavBar>
 				<SearchBox>
-					<SearchBar handleQuery={handleQuery} style={{ backgroundColor: '#755bb0' }} />
+					<SearchBar handleQuery={handleQuery} style={fixed ? { backgroundColor: '#755bb0' } : {}} />
 				</SearchBox>
-			</Sticky>
+			</React.Fragment>
+		);
+	};
+
+	return (
+		<Wrapper>
+			<Sticky>{renderSticky}</Sticky>
 			{enterLoading && <WaveLoading />}
 			{query.length ? searchLoading && <WaveLoading /> : null}
 			{query.length === 0 ? !enterLoading && renderNewAlbumsList() : !searchLoading && renderSearchResult()}
+			{renderRoutes(route.routes)}
 		</Wrapper>
 	);
 }
+
+Albums.propTypes = {
+	route: PropTypes.shape({
+		routes: PropTypes.arrayOf(
+			PropTypes.shape({
+				path: PropTypes.string
+			})
+		)
+	}).isRequired
+};
 
 export default React.memo(Albums);

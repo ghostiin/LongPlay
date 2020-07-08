@@ -30,7 +30,7 @@ const CardInfo = styled.div`
 	}
 	.name {
 		font-weight: 600;
-		font-size: ${({ small }) => (small ? '1.2rem' : '1.8em')};
+		font-size: ${({ small }) => (small ? '1.2rem' : '1.8rem')};
 		${({ small }) => {
 			if (small) {
 				return style.moreWrap();

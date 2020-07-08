@@ -9,6 +9,7 @@ const ResetStyle = createGlobalStyle`
     /* 自定义 */
     html{
     background: linear-gradient(${style.bgColorLight}, ${style.bgColorDark}) no-repeat fixed;
+    scroll-behavior: smooth;
     }
 
     *, *:before, *:after {
@@ -29,6 +30,19 @@ const ResetStyle = createGlobalStyle`
     img {
     max-width: 100%;
     height: auto;
+    }
+     /* 自定义 */
+    a:link,a:visited {
+        text-decoration:none;
+        color: ${style.textColor};
+    }
+
+    a:hover {
+    text-decoration: none;
+
+    }
+    a:active {
+    text-decoration: none;
     }
 `;
 

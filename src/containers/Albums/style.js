@@ -53,19 +53,53 @@ const GridContainer = styled.div`
 `;
 
 const GridItem = styled.div`
-	padding: 0 0.5rem;
-
-	img {
-		width: 100%;
+	/* margin: 0 0.5rem; */
+	position: relative;
+	
+	.cover {
+		width: 14rem;
+		height:14rem;
+		img {
+			width:100%;
+		}
 		/* box-shadow: ${style.boxShadow}; */
 	}
 
+	.msk {
+		position: absolute;
+		top:0;
+		left:0;
+		width: 14rem;
+		height:14rem;
+		background-color: rgba(0, 0, 0, .5);
+		opacity: 0;
+		transition:all .2s;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+
+		i {
+			font-size:4rem;
+			margin: 0 0.5rem;
+			cursor: pointer;
+		}
+		
+		&:hover {
+			opacity:1;
+		}
+	}
+	a:hover {
+    text-decoration: underline;
+    }
+
 	p {
 		${style.noWrap};
-
+		margin-top: 0.5rem;
 		span {
 			color: ${style.subColor};
 		}
+
+		
 	}
 `;
 
@@ -121,6 +155,13 @@ const NavItem = styled.div`
 	}
 `;
 
+const BackTop = styled.div`
+	position: fixed;
+	right: 2rem;
+	bottom: 2rem;
+	cursor: pointer;
+`;
+
 const SearchBox = styled.div`text-align: center;`;
 
-export { Wrapper, GridContainer, GridItem, Caption, SearchBox, Logo, NavBar, NavItem };
+export { Wrapper, GridContainer, GridItem, Caption, SearchBox, Logo, NavBar, NavItem, BackTop };
