@@ -51,7 +51,15 @@ const PlayControl = styled.div`
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		letter-spacing: 1rem;
+
+		.control-btn {
+			width: 80%;
+
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly;
+			align-items: center;
+		}
 
 		.center {
 			font-size: 2rem;
@@ -76,5 +84,18 @@ const PlayControl = styled.div`
 		text-align: right;
 	}
 `;
-const ProgressBar = styled.div``;
-export { PlayerWrapper, PlayerBar, PlayControl, ProgressBar };
+const ProgressBarWrapper = styled.div`
+	padding-top: 1rem;
+	font-size: 0.8rem;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	.time {
+		margin: 0 0.5rem;
+	}
+	.progressbar {
+		width: 75%;
+		flex: 1;
+	}
+`;
+export { PlayerWrapper, PlayerBar, PlayControl, ProgressBarWrapper };

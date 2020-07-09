@@ -15,6 +15,7 @@ module.exports = {
 	plugins: [ 'react', 'prettier' ],
 	rules: {
 		'react/jsx-filename-extension': [ 1, { extensions: [ '.js', '.jsx' ] } ],
+		'no-bitwise': [ 'error', { int32Hint: true } ],
 		'no-console': 'off',
 		'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
 		'react-hooks/exhaustive-deps': 'warn', // 检查 effect 的依赖

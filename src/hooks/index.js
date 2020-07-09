@@ -47,8 +47,11 @@ function useToggle(initialState = false) {
 	return [ state, toggle ];
 }
 
-// function useSelect(){
-// 	const relativeRef = useRef(null);
+function useFormatTime(time = 0) {
+	const seconds = time | 0;
+	const min = (seconds / 60) | 0;
+	const sec = (seconds % 60).toString().padStart(2, '0'); // 不足两位时用0填充
+	return `${min}:${sec}`;
+}
 
-// }
-export { usePrevious, useDebounce, useToggle };
+export { usePrevious, useDebounce, useToggle, useFormatTime };

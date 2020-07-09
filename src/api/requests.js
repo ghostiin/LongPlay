@@ -46,4 +46,9 @@ const checkMusic = (id) => {
 	return musicApi.get(`/check/music?id=${id}`);
 };
 
-export { getNewAlbums, getAlbumDetail, getSearchAlbums, checkMusic };
+// 获取音乐播放链接
+const getSongUrl = (id) => {
+	return `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+};
+
+export { getNewAlbums, getAlbumDetail, getSearchAlbums, checkMusic, getSongUrl };
