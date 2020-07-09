@@ -5,6 +5,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Wrapper, Header, Logo, NavBar, NavItem } from './style';
 import Button from '../../UI/Button';
 import Media from '../../components/MediaQueries';
+import Player from '../Player';
 import logo from './logo.svg';
 
 function Home({ route }) {
@@ -45,6 +46,7 @@ function Home({ route }) {
 				</NavItem>
 			</NavBar>
 			{renderRoutes(route.routes)}
+			<Player />
 		</Wrapper>
 	);
 }
@@ -60,3 +62,4 @@ Home.defaultProps = {
 };
 
 export default React.memo(Home);
+// export default Home;

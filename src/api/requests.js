@@ -1,4 +1,4 @@
-import musicApi from './config';
+import { musicApi } from './config';
 
 // 新碟上架
 // 说明 : 调用此接口 , 可获取新碟上架列表 , 如需具体音乐信息需要调用获取专辑列表接 口 /album , 然后传入 id, 如 /album?id=32311&limit=30

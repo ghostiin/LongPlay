@@ -14,5 +14,10 @@ musicApi.interceptors.response.use(
 	}
 );
 
-// 之后可能打算加入更多api，比如乐评网站、歌词网站的api
-export default musicApi;
+const playMode = {
+	shuffle: 1,
+	repeat: 2,
+	default: 0
+};
+
+export { musicApi, playMode };

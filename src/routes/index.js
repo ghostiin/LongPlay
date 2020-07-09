@@ -11,6 +11,7 @@ export default [
 		path: '/zen',
 		component: Zen
 	},
+
 	{
 		component: Home, // 公共组件home
 		routes: [
@@ -18,7 +19,6 @@ export default [
 				path: '/vol',
 				component: Vol
 			},
-
 			{
 				path: '/albums',
 				component: Albums,

@@ -5,7 +5,7 @@ import default200 from './default200.svg';
 const Wrapper = styled.div`
 	color: ${style.textColor};
 	font-family: ${style.sansFont};
-	width: 50rem;
+	width: ${({ width }) => width || '50rem'};
 	height: 37.5rem;
 	/* url(${({ bgImg }) => bgImg}) */
 	background-image: linear-gradient(rgba(73, 51, 126,0.8), rgba(73, 51, 126,0.8)),  
@@ -86,7 +86,7 @@ const SongInfo = styled.div`
 const Content = styled.div`
 	.item {
 		height: max-content;
-		margin: 1rem 0;
+		margin: 1rem;
 	}
 	padding-bottom: 2rem;
 `;

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 
 function usePrevious(value) {
 	// The ref object is a generic container whose current property is mutable ...
@@ -41,4 +41,14 @@ function useDebounce(value, delay) {
 	return debouncedValue;
 }
 
-export { usePrevious, useDebounce };
+function useToggle(initialState = false) {
+	const [ state, setState ] = useState(initialState);
+	const toggle = useCallback(() => setState((state) => !state), []);
+	return [ state, toggle ];
+}
+
+// function useSelect(){
+// 	const relativeRef = useRef(null);
+
+// }
+export { usePrevious, useDebounce, useToggle };

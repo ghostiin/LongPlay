@@ -15,9 +15,19 @@ const Mobile = ({ children }) => {
 	return isMobile ? children : null;
 };
 
+const More1204 = ({ children }) => {
+	const isMore1204 = useMediaQuery({ minWidth: 1204 });
+	return isMore1204 ? children : null;
+};
+
+const Less1204 = ({ children }) => {
+	const isMore1204 = useMediaQuery({ maxWidth: 1203 });
+	return isMore1204 ? children : null;
+};
+
 const Default = ({ children }) => {
 	const isNotMobile = useMediaQuery({ minWidth: 768 });
 	return isNotMobile ? children : null;
 };
 
-export default { Desktop, Tablet, Mobile, Default };
+export default { Desktop, Tablet, Mobile, Default, More1204, Less1204 };

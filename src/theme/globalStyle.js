@@ -44,6 +44,11 @@ const ResetStyle = createGlobalStyle`
     a:active {
     text-decoration: none;
     }
+
+    /* playbox */
+    .select  {
+        position:fixed;
+    }
 `;
 
 export default ResetStyle;

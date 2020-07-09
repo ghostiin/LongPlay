@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import { actions as boxActionTypes } from '../../../components/Playbox/store';
 import * as actionTypes from '../store/action';
 import Modal from '../../../UI/Modal';
 import Scroll from '../../../UI/Scroll';
 import SolarSystemLoading from '../../../UI/SolarSystemLoading';
+import Media from '../../../components/MediaQueries';
 import { Wrapper, AlbumInfo, SongInfo, Content } from './style';
 import default200 from './default200.svg';
 
@@ -12,6 +14,7 @@ const AlbumDetail = ({ history }) => {
 	const id = history.location.pathname.split('/').pop();
 	const { newAlbumsList, searchAlbumsList, detailLoading } = useSelector((state) => state.albums);
 	const dispatch = useDispatch();
+	const { boxAlbumsList } = useSelector((state) => state.box);
 	const albumDefault = {
 		name: 'Oops!Cant find the album',
 		picUrl: default200,
@@ -33,6 +36,7 @@ const AlbumDetail = ({ history }) => {
 	}, []);
 
 	const renderInfo = () => {
+		const show = !!boxAlbumsList[id];
 		return (
 			<AlbumInfo>
 				<div className='cover'>
@@ -46,7 +50,27 @@ const AlbumDetail = ({ history }) => {
 				</div>
 				<div className='state'>
 					<i className='iconfont'>&#xe6e2;</i>
-					<i className='iconfont'>&#xea00;</i>
+					{show ? (
+						<i
+							className='iconfont'
+							onClick={() => {
+								dispatch(boxActionTypes.removeAlbumFromBox(id));
+							}}
+							aria-hidden='true'
+						>
+							&#xe9fe;
+						</i>
+					) : (
+						<i
+							className='iconfont'
+							onClick={() => {
+								dispatch(boxActionTypes.addAlbumToBox(id));
+							}}
+							aria-hidden='true'
+						>
+							&#xea00;
+						</i>
+					)}
 				</div>
 			</AlbumInfo>
 		);
@@ -82,12 +106,22 @@ const AlbumDetail = ({ history }) => {
 		);
 	};
 	// to-do ondismiss err
-	return (
-		<Modal onDismiss={() => history.goBack()}>
-			<Wrapper bgImg={album ? `${album.picUrl}?param=310x310` : default200}>
+	const renderCard = (width = '50rem') => {
+		return (
+			<Wrapper bgImg={album ? `${album.picUrl}?param=310x310` : default200} width={width}>
 				{renderInfo()}
 				{renderSonglist()}
 			</Wrapper>
+		);
+	};
+	// 直接传递函数会每次生成不一样的引用导致memo比较结果始终不同
+	const handleBack = useCallback(() => {
+		history.goBack();
+	}, []);
+	return (
+		<Modal onDismiss={handleBack}>
+			<Media.Desktop>{renderCard()}</Media.Desktop>
+			<Media.Tablet>{renderCard('45rem')}</Media.Tablet>
 		</Modal>
 	);
 };

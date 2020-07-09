@@ -37,11 +37,10 @@ const GridContainer = styled.div`
 	padding: 3rem ${({ Tablet }) => (Tablet ? '5rem' : '10rem')};
 	display: grid;
 
-	grid-template-rows: repeat(auto-fit, minmax(${({ Tablet }) => (Tablet ? '16rem' : '20rem')}, min-content));
-	grid-template-columns: repeat(auto-fill, ${({ Tablet }) => (Tablet ? '12rem' : '14rem')});
+	grid-template-rows: repeat(auto-fit, minmax(${({ Tablet }) => (Tablet ? '16rem' : '19rem')}, min-content));
+	grid-template-columns: repeat(auto-fill, ${({ Tablet }) => (Tablet ? '12rem' : '13rem')});
 
-	/* grid-row-gap: 3rem;
-	grid-column-gap: 3rem; */
+	grid-column-gap: 1rem;
 
 	/* for implicit grids */
 	grid-auto-rows: ${({ Tablet }) => (Tablet ? '16rem' : '20rem')};
@@ -50,56 +49,53 @@ const GridContainer = styled.div`
 	justify-content: center; */
 	align-content: center;
 	justify-content: space-evenly;
+
+	margin-bottom: 12vh;
 `;
 
 const GridItem = styled.div`
 	/* margin: 0 0.5rem; */
 	position: relative;
-	
+
 	.cover {
-		width: 14rem;
-		height:14rem;
-		img {
-			width:100%;
-		}
-		/* box-shadow: ${style.boxShadow}; */
+		width: 100%;
 	}
 
 	.msk {
 		position: absolute;
-		top:0;
-		left:0;
-		width: 14rem;
-		height:14rem;
-		background-color: rgba(0, 0, 0, .5);
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding-bottom: 100%;
+		height: 0;
 		opacity: 0;
-		transition:all .2s;
-		display:flex;
-		justify-content:center;
-		align-items:center;
+		background-color: rgba(0, 0, 0, .5);
+		transition: all .2s;
+		text-align: center;
 
 		i {
-			font-size:4rem;
+			font-size: 3rem;
 			margin: 0 0.5rem;
 			cursor: pointer;
+
+			display: inline-block;
+			transform: translateY(150%);
 		}
-		
+
 		&:hover {
-			opacity:1;
+			opacity: 1;
 		}
 	}
 	a:hover {
-    text-decoration: underline;
-    }
+		text-decoration: underline;
+	}
 
 	p {
 		${style.noWrap};
-		margin-top: 0.5rem;
+
 		span {
 			color: ${style.subColor};
 		}
-
-		
 	}
 `;
 
@@ -107,7 +103,7 @@ const Logo = styled.div`
 	font-family: ${style.logoFont};
 	font-size: 2rem;
 	span {
-		margin-right: 2.5rem;
+		margin-right: 1.5rem;
 	}
 `;
 
