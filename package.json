@@ -25,6 +25,7 @@
 		"react-scripts": "3.4.1",
 		"react-transition-group": "^4.4.1",
 		"redux": "^4.0.5",
+		"redux-persist": "^6.0.0",
 		"redux-thunk": "^2.3.0",
 		"rgbaster": "^2.1.1",
 		"styled-components": "^5.1.1",

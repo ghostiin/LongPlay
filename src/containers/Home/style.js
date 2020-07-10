@@ -3,7 +3,7 @@ import style from '../../theme';
 
 // 设置全屏背景色
 const Wrapper = styled.div`
-	.btn {
+	.home-btn {
 		display: inline-block;
 		margin: 0 0.5rem;
 		vertical-align: middle;

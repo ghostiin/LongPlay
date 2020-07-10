@@ -34,7 +34,7 @@ function Home({ route }) {
 						</Button>
 					</Link>
 					<Link to='/about'>
-						<div className='about btn'>
+						<div className='about home-btn'>
 							<i className='iconfont'>&#xe6de;</i>
 						</div>
 					</Link>

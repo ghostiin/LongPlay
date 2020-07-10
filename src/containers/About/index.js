@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import Modal from '../../UI/Modal';
 import Button from '../../UI/Button';
