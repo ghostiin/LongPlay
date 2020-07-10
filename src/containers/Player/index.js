@@ -15,34 +15,15 @@ import style from '../../theme';
 
 const Player = () => {
 	const playerRef = useRef(null);
+	const loaded = useRef();
 	const audioRef = useRef();
 	const { playing, playList, defaultList, mode, currentIdx, currentSong } = useSelector((state) => state.player);
+	const { boxAlbumsList, boxAlbumsId } = useSelector((state) => state.box);
 	const dispatch = useDispatch();
 
 	const [ currentTime, setCurrentTime ] = useState(0);
 	const [ duration, setDuration ] = useState(0);
 	const percent = currentTime / duration;
-
-	// 首次初始化player
-	useEffect(() => {
-		// 无正在播放歌曲,无playlist
-		if (!currentSong) return;
-		// 若有则说明playlist存在,初始化player
-		dispatch(actionTypes.setCurrentIdx(0)); // -1 =>0
-		const current = playList[0];
-		if (!current) return;
-		dispatch(actionTypes.setCurrentSong(current));
-		audioRef.current.src = getSongUrl(current.id);
-		setTimeout(() => {
-			if (audioRef.current) audioRef.current.play();
-		});
-		dispatch(actionTypes.setPlayingState(true));
-		setCurrentTime(0);
-		// no-bitwise: ["error", { "int32Hint": true }]
-		// |0为了取整
-		// 转换为秒数
-		setDuration((current.dt / 1000) | 0);
-	}, []);
 	// 控制播放暂停
 	useEffect(
 		() => {
@@ -63,6 +44,40 @@ const Player = () => {
 			all += id + 1 !== len ? `${e.name} , ` : e.name;
 		});
 		return all;
+	};
+	const prevAlbum = () => {
+		if (_.isEmpty(currentSong)) return;
+		if (currentSong.al.id in boxAlbumsList) {
+			let idx = _.findIndex(boxAlbumsId, (e) => {
+				return e === currentSong.al.id;
+			});
+			if (idx === 0) {
+				idx = boxAlbumsId.length - 1;
+			} else {
+				idx -= 1;
+			}
+			dispatch(actionTypes.playNow(boxAlbumsId[idx]));
+			// dispatch(actionTypes.setPlaylist(songlist));
+		} else {
+			dispatch(actionTypes.playNow(boxAlbumsId[0]));
+		}
+	};
+	const nextAlbum = () => {
+		if (_.isEmpty(currentSong)) return;
+		if (currentSong.al.id in boxAlbumsList) {
+			let idx = _.findIndex(boxAlbumsId, (e) => {
+				return e === currentSong.al.id;
+			});
+			if (idx === boxAlbumsId.length - 1) {
+				idx = 0;
+			} else {
+				idx += 1;
+			}
+
+			dispatch(actionTypes.playNow(boxAlbumsId[idx]));
+		} else {
+			dispatch(actionTypes.playNow(boxAlbumsId[0]));
+		}
 	};
 	const togglePlay = () => {
 		dispatch(actionTypes.setPlayingState(!playing));
@@ -109,6 +124,11 @@ const Player = () => {
 			playNext();
 		}
 	};
+	const onErr = () => {
+		// 当前音乐无法播放,允许切歌
+		loaded.current = true;
+		alert('播放出错/(ㄒoㄒ)/~~这首歌可能是被网易云私藏了');
+	};
 
 	const preSong = usePrevious(currentSong);
 	// 当click了prev next后更新歌曲src
@@ -120,16 +140,21 @@ const Player = () => {
 				!playList.length ||
 				currentIdx === -1 ||
 				!playList[currentIdx] ||
-				(playList[currentIdx] && preSong && playList[currentIdx].id === preSong.id)
+				(playList[currentIdx] && preSong && playList[currentIdx].id === preSong.id) ||
+				loaded.current === false
 			) {
 				return undefined;
 			}
 
 			const current = playList[currentIdx];
+			if (!current) return undefined;
+			loaded.current = false;
 			dispatch(actionTypes.setCurrentSong(current));
 			audioRef.current.src = getSongUrl(current.id);
 			setTimeout(() => {
-				audioRef.current.play();
+				audioRef.current.play().then(() => {
+					loaded.current = true;
+				});
 			});
 			dispatch(actionTypes.setPlayingState(true));
 			setCurrentTime(0);
@@ -186,7 +211,7 @@ const Player = () => {
 	return (
 		<React.Fragment>
 			<PlayerWrapper>
-				<audio ref={audioRef} onTimeUpdate={updateCurrentTime} onEnded={onPlayEnd} />
+				<audio ref={audioRef} onTimeUpdate={updateCurrentTime} onEnded={onPlayEnd} onError={onErr} />
 				<PlayerBar ref={playerRef}>
 					<PlayControl>
 						<div className='info'>
@@ -202,7 +227,7 @@ const Player = () => {
 								width='80'
 								height='80'
 							/>
-							<Marquee>
+							<Marquee style={{ minWidth: '30%' }}>
 								{!_.isEmpty(currentSong) && currentSong.name ? (
 									currentSong.name
 								) : (
@@ -276,7 +301,16 @@ const Player = () => {
 							</ProgressBarWrapper>
 						</div>
 						<div className='func'>
-							<Playlist relativeRef={playerRef} />
+							<Playlist
+								relativeRef={playerRef}
+								prevAlbum={prevAlbum}
+								nextAlbum={nextAlbum}
+								playlist={playList}
+								currentIdx={currentIdx}
+								setCurrentIdx={(id) => {
+									dispatch(actionTypes.setCurrentIdx(id));
+								}}
+							/>
 							<Playbox relativeRef={playerRef} />
 						</div>
 					</PlayControl>

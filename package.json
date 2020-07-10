@@ -25,6 +25,7 @@
 		"react-transition-group": "^4.4.1",
 		"redux": "^4.0.5",
 		"redux-thunk": "^2.3.0",
+		"rgbaster": "^2.1.1",
 		"styled-components": "^5.1.1",
 		"typeface-libre-barcode-39-text": "0.0.63",
 		"typeface-lora": "0.0.72",

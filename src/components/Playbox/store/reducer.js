@@ -1,10 +1,13 @@
 import produce from 'immer';
 import _ from 'lodash';
 import { ADD_ALBUM_TO_BOX, REMOVE_ALBUM_FROM_BOX } from './constants';
+import { mockboxAlbumsId, mockboxAlbumsList } from '../../../api/mockBox';
 
 const defaultState = {
-	boxAlbumsList: {},
-	boxAlbumsId: []
+	// boxAlbumsList: {},
+	boxAlbumsList: mockboxAlbumsList,
+	// boxAlbumsId: []
+	boxAlbumsId: mockboxAlbumsId
 };
 
 const reducer = (state = defaultState, action) =>

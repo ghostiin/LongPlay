@@ -37,11 +37,7 @@ const Playbox = ({ relativeRef }) => {
 		},
 		[ visible ]
 	);
-	const playNow = (id) => {
-		dispatch(playerActionTypes.setDefaultlist(boxAlbumsList[id].songs));
-		dispatch(playerActionTypes.setPlaylist(boxAlbumsList[id].songs));
-		dispatch(playerActionTypes.setPlayingState(true));
-	};
+
 	const renderList = (ids, list) => {
 		return ids.map((e) => {
 			const id = e.toString();
@@ -57,7 +53,7 @@ const Playbox = ({ relativeRef }) => {
 								className='iconfont'
 								aria-hidden='true'
 								onClick={() => {
-									playNow(id);
+									dispatch(playerActionTypes.playNow(id));
 								}}
 							>
 								&#xe600;

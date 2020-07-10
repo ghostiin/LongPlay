@@ -59,6 +59,15 @@ const GridItem = styled.div`
 
 	.cover {
 		width: 100%;
+		overflow: hidden;
+
+		/* img {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		} */
 	}
 
 	.msk {

@@ -62,7 +62,7 @@ const VolCard = (props) => {
 						Play Now
 					</Button>
 					{collected ? (
-						<Button onPropsClick={collect} outlined outlinedColor={style.mainColor}>
+						<Button outlined outlinedColor={style.mainColor}>
 							<i className='iconfont'>&#xe618;</i>
 							In Box!
 						</Button>

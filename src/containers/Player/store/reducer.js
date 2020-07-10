@@ -16,7 +16,8 @@ const defaultState = {
 	mode: {
 		repeat: false,
 		shuffle: false,
-		loop: true
+		loop: false,
+		zen: true
 	},
 	currentIdx: -1,
 	currentSong: {}

@@ -41,12 +41,20 @@ const setCurrentSong = (song) => ({
 const playNow = (id) => async (dispatch) => {
 	const res = await getAlbumDetail(id);
 	dispatch({
+		type: SET_CURRENT_IDX,
+		payload: -1
+	});
+	dispatch({
 		type: SET_PLAYLIST,
 		payload: res.songs
 	});
 	dispatch({
 		type: SET_DEFAULT_LIST,
 		payload: res.songs
+	});
+	dispatch({
+		type: SET_CURRENT_IDX,
+		payload: 0
 	});
 };
 

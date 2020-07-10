@@ -48,6 +48,10 @@ const useAnimationDuration = (speed) => {
 					setAnimationDuration((draft) => {
 						return `${width * 20 / marqueeSpeed}ms`;
 					});
+				} else {
+					setAnimationDuration((draft) => {
+						return `0ms`;
+					});
 				}
 				// console.log(textElem.current.clientWidth, textElem.current.scrollWidth, calcElem.current.clientWidth);
 			};
