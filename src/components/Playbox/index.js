@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { actions as boxActionTypes } from './store';
+import { actions as playerActionTypes } from '../../containers/Player/store';
 import Select from '../../UI/Select';
 import Scroll from '../../UI/Scroll';
 import { Wrapper, GridItem, Content, Info } from './style';
@@ -36,6 +37,11 @@ const Playbox = ({ relativeRef }) => {
 		},
 		[ visible ]
 	);
+	const playNow = (id) => {
+		dispatch(playerActionTypes.setDefaultlist(boxAlbumsList[id].songs));
+		dispatch(playerActionTypes.setPlaylist(boxAlbumsList[id].songs));
+		dispatch(playerActionTypes.setPlayingState(true));
+	};
 	const renderList = (ids, list) => {
 		return ids.map((e) => {
 			const id = e.toString();
@@ -47,7 +53,13 @@ const Playbox = ({ relativeRef }) => {
 						<img src={`${item.picUrl}?param=310x310`} alt={item.name} />
 
 						<div className='msk'>
-							<i className='iconfont' aria-hidden='true'>
+							<i
+								className='iconfont'
+								aria-hidden='true'
+								onClick={() => {
+									playNow(id);
+								}}
+							>
 								&#xe600;
 							</i>
 
@@ -74,7 +86,9 @@ const Playbox = ({ relativeRef }) => {
 							)}
 						</div>
 					</div>
+
 					<p>{item.name}</p>
+
 					<p>
 						<span>By </span>
 						{item.artist.name}

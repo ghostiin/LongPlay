@@ -1,11 +1,12 @@
 import {
 	SET_PLAYING_STATE,
 	SET_PLAYLIST,
-	SET_SHUFFLE_LIST,
+	SET_DEFAULT_LIST,
 	SET_PLAY_MODE,
 	SET_CURRENT_IDX,
 	SET_CURRENT_SONG
 } from './constants';
+import { getAlbumDetail } from '../../../api/requests';
 
 const setPlayingState = (state) => ({
 	type: SET_PLAYING_STATE,
@@ -17,9 +18,9 @@ const setPlaylist = (songlist) => ({
 	payload: songlist
 });
 
-const setShufflelist = (shufflelist) => ({
-	type: SET_SHUFFLE_LIST,
-	payload: shufflelist
+const setDefaultlist = (defaultlist) => ({
+	type: SET_DEFAULT_LIST,
+	payload: defaultlist
 });
 
 const setPlayMode = (mode) => ({
@@ -37,4 +38,16 @@ const setCurrentSong = (song) => ({
 	payload: song
 });
 
-export { setPlayingState, setPlaylist, setShufflelist, setPlayMode, setCurrentIdx, setCurrentSong };
+const playNow = (id) => async (dispatch) => {
+	const res = await getAlbumDetail(id);
+	dispatch({
+		type: SET_PLAYLIST,
+		payload: res.songs
+	});
+	dispatch({
+		type: SET_DEFAULT_LIST,
+		payload: res.songs
+	});
+};
+
+export { playNow, setPlayingState, setPlaylist, setDefaultlist, setPlayMode, setCurrentIdx, setCurrentSong };

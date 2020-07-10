@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { actions as boxActionTypes } from '../../../components/Playbox/store';
+import { actions as playerActionTypes } from '../../Player/store';
 import * as actionTypes from '../store/action';
 import Modal from '../../../UI/Modal';
 import Scroll from '../../../UI/Scroll';
@@ -49,7 +50,9 @@ const AlbumDetail = ({ history }) => {
 					{album.artist.name}
 				</div>
 				<div className='state'>
-					<i className='iconfont'>&#xe6e2;</i>
+					<i className='iconfont' aria-hidden onClick={() => dispatch(playerActionTypes.playNow(id))}>
+						&#xe6e2;
+					</i>
 					{show ? (
 						<i
 							className='iconfont'

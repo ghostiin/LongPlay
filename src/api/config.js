@@ -14,10 +14,4 @@ musicApi.interceptors.response.use(
 	}
 );
 
-const playMode = {
-	shuffle: 1,
-	repeat: 2,
-	default: 0
-};
-
-export { musicApi, playMode };
+export { musicApi };

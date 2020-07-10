@@ -30,6 +30,7 @@ const Player = () => {
 		// 若有则说明playlist存在,初始化player
 		dispatch(actionTypes.setCurrentIdx(0)); // -1 =>0
 		const current = playList[0];
+		if (!current) return;
 		dispatch(actionTypes.setCurrentSong(current));
 		audioRef.current.src = getSongUrl(current.id);
 		setTimeout(() => {
@@ -112,6 +113,7 @@ const Player = () => {
 	const preSong = usePrevious(currentSong);
 	// 当click了prev next后更新歌曲src
 	useEffect(
+		// eslint-disable-next-line consistent-return
 		() => {
 			// 排除非播放时: 无播放列表/无播放idx/无对应音乐资源/是同一首歌时
 			if (
@@ -189,13 +191,27 @@ const Player = () => {
 					<PlayControl>
 						<div className='info'>
 							<img
-								src={currentSong.al ? `${currentSong.al.picUrl}?param=310x310` : default80}
+								src={
+									!_.isEmpty(currentSong) && currentSong.al ? (
+										`${currentSong.al.picUrl}?param=310x310`
+									) : (
+										default80
+									)
+								}
 								alt='cover'
 								width='80'
 								height='80'
 							/>
-							<Marquee>{currentSong.name ? currentSong.name : 'Good Music To Bad Days'}</Marquee>
-							<Marquee>{currentSong.ar ? getAllAr(currentSong.ar) : 'Play now'}</Marquee>
+							<Marquee>
+								{!_.isEmpty(currentSong) && currentSong.name ? (
+									currentSong.name
+								) : (
+									'Good Music To Bad Days'
+								)}
+							</Marquee>
+							<Marquee>
+								{!_.isEmpty(currentSong) && currentSong.ar ? getAllAr(currentSong.ar) : 'Play now'}
+							</Marquee>
 						</div>
 						<div className='control'>
 							<div className='control-btn'>

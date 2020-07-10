@@ -11,6 +11,7 @@ import { CoverImg, CardInfo, CardDescription, CardAction, Nameplate } from './st
 
 const VolCard = (props) => {
 	const { imgUrl, cardCatgory, cardName, singerName, description } = props;
+	const { playNow, collect, collected } = props;
 	return (
 		<Card>
 			<div className='side side--front'>
@@ -56,14 +57,21 @@ const VolCard = (props) => {
 					</Scroll>
 				</CardDescription>
 				<CardAction>
-					<Button>
+					<Button onPropsClick={playNow} aria-hidden>
 						<i className='iconfont'>&#xe9f9;</i>
 						Play Now
 					</Button>
-					<Button outlined outlinedColor={style.mainColor}>
-						<i className='iconfont'>&#xe69f;</i>
-						Collect
-					</Button>
+					{collected ? (
+						<Button onPropsClick={collect} outlined outlinedColor={style.mainColor}>
+							<i className='iconfont'>&#xe618;</i>
+							In Box!
+						</Button>
+					) : (
+						<Button onPropsClick={collect} outlined outlinedColor={style.mainColor}>
+							<i className='iconfont'>&#xe69f;</i>
+							Collect
+						</Button>
+					)}
 				</CardAction>
 				<Nameplate>{singerName}</Nameplate>
 			</div>
@@ -76,7 +84,10 @@ VolCard.propTypes = {
 	cardCatgory: PropTypes.string,
 	cardName: PropTypes.string,
 	singerName: PropTypes.string,
-	description: PropTypes.string
+	description: PropTypes.string,
+	playNow: PropTypes.func,
+	collect: PropTypes.func,
+	collected: PropTypes.bool
 };
 
 VolCard.defaultProps = {
@@ -84,7 +95,10 @@ VolCard.defaultProps = {
 	cardCatgory: 'ALBUM',
 	cardName: 'ALBUM NAME',
 	singerName: 'SINGER',
-	description: 'Good Music To Bad Days'
+	description: 'Good Music To Bad Days',
+	playNow: null,
+	collect: null,
+	collected: false
 };
 
 export default React.memo(VolCard);

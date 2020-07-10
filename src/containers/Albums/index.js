@@ -9,6 +9,7 @@ import { Wrapper, GridContainer, GridItem, Caption, SearchBox, Logo, NavBar, Nav
 import SearchBar from '../../components/SearchBar';
 import * as actionTypes from './store/action';
 import { actions as boxActionTypes } from '../../components/Playbox/store';
+import { actions as playerActionTypes } from '../Player/store';
 import defaultCover from './default-cover.svg';
 import WaveLoading from '../../UI/WaveLoading';
 import Sticky from '../../UI/Sticky';
@@ -44,10 +45,6 @@ function Albums({ route }) {
 		[ query, dispatch ]
 	);
 
-	const playAlbum = () => {
-		console.log('play');
-	};
-
 	const renderList = (ids, list) => {
 		return ids.map((e) => {
 			const id = e.toString();
@@ -60,7 +57,11 @@ function Albums({ route }) {
 							<img src={`${item.picUrl}?param=310x310`} alt={item.name} />
 						</LazyLoad>
 						<div className='msk'>
-							<i className='iconfont' onClick={playAlbum} aria-hidden='true'>
+							<i
+								className='iconfont'
+								onClick={() => dispatch(playerActionTypes.playNow(id))}
+								aria-hidden='true'
+							>
 								&#xe600;
 							</i>
 

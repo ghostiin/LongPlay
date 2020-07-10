@@ -3,9 +3,10 @@ import propTypes from 'prop-types';
 import BaseButton from './style';
 import style from '../../theme';
 
-const Button = ({ bgColor, fontColor, fontSize, subColor, children, outlined, outlinedColor }) => {
+const Button = ({ onPropsClick, bgColor, fontColor, fontSize, subColor, children, outlined, outlinedColor }) => {
 	return (
 		<BaseButton
+			onClick={onPropsClick}
 			bgColor={bgColor}
 			fontColor={fontColor}
 			fontSize={fontSize}
@@ -25,7 +26,8 @@ Button.propTypes = {
 	fontSize: propTypes.string, // button text 大小
 	children: propTypes.node, // 渲染子元素
 	outlined: propTypes.bool, // 是否显示outlined（outlined则背景色为透明）
-	outlinedColor: propTypes.string // 显示的outline的颜色
+	outlinedColor: propTypes.string, // 显示的outline的颜色
+	onPropsClick: propTypes.func
 };
 
 Button.defaultProps = {
@@ -35,6 +37,7 @@ Button.defaultProps = {
 	fontSize: '1rem',
 	children: null,
 	outlined: false,
-	outlinedColor: style.textColor
+	outlinedColor: style.textColor,
+	onPropsClick: null
 };
 export default React.memo(Button);
