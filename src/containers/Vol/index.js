@@ -25,7 +25,7 @@ function Vol({ volData }) {
 						collect={() => {
 							dispatch(boxActionTypes.addAlbumToBox(vol.id));
 						}}
-						collected={!!boxAlbumsList[vol.id.toString()]}
+						collected={!!boxAlbumsList[vol.id]}
 						cardName={cardName}
 						singerName={singerName}
 						description={description}

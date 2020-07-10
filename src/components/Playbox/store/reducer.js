@@ -17,6 +17,7 @@ const reducer = (state = defaultState, action) =>
 			case ADD_ALBUM_TO_BOX: {
 				const { id } = action.payload.album;
 				draftState.boxAlbumsId.push(id);
+				draftState.boxAlbumsId = _.uniq(draftState.boxAlbumsId);
 				draftState.boxAlbumsList[id] = action.payload;
 				return draftState;
 			}
