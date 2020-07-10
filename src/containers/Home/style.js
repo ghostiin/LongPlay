@@ -2,7 +2,25 @@ import styled from 'styled-components/macro';
 import style from '../../theme';
 
 // 设置全屏背景色
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	.btn {
+		display: inline-block;
+		margin: 0 0.5rem;
+		vertical-align: middle;
+		cursor: pointer;
+		transition: all .2s;
+		&:hover {
+			transform: scale(1.1);
+		}
+		&:active {
+			opacity: 0.5;
+			transform: scale(0.9);
+		}
+		.iconfont {
+			font-size: 2.5rem;
+		}
+	}
+`;
 
 const Header = styled.div`
 	display: flex;

@@ -1,13 +1,14 @@
 import produce from 'immer';
 import _ from 'lodash';
-import { ADD_ALBUM_TO_BOX, REMOVE_ALBUM_FROM_BOX } from './constants';
-import { mockboxAlbumsId, mockboxAlbumsList } from '../../../api/mockBox';
+import { ADD_ALBUM_TO_BOX, REMOVE_ALBUM_FROM_BOX, SET_PALETTE } from './constants';
+// import { mockboxAlbumsId, mockboxAlbumsList } from '../../../api/mockBox';
 
 const defaultState = {
-	// boxAlbumsList: {},
-	boxAlbumsList: mockboxAlbumsList,
-	// boxAlbumsId: []
-	boxAlbumsId: mockboxAlbumsId
+	boxAlbumsList: {},
+	// boxAlbumsList: mockboxAlbumsList,
+	boxAlbumsId: [],
+	// boxAlbumsId: mockboxAlbumsId,
+	palette: {}
 };
 
 const reducer = (state = defaultState, action) =>
@@ -25,6 +26,9 @@ const reducer = (state = defaultState, action) =>
 					return n.toString() !== action.payload;
 				});
 				delete draftState.boxAlbumsList[action.payload];
+				return draftState;
+			case SET_PALETTE:
+				draftState.palette[action.payload.id] = action.payload.palette;
 				return draftState;
 			default:
 				return draftState;

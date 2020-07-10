@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Wrapper, Content, Item, ScrollWrapper } from './style';
 import Scroll from '../../UI/Scroll';
 
@@ -31,7 +32,7 @@ const PlayboxBar = ({ boxAlbumsId, boxAlbumsList, switchAlbum, currentAlbumId })
 					</Scroll>
 				</ScrollWrapper>
 			) : (
-				'GO AND FIND SOME GOOD MUSIC FOR YOUSELF'
+				<Link to='/albums'>GO AND FIND SOME GOOD MUSIC FOR YOUSELF</Link>
 			)}
 		</Wrapper>
 	);

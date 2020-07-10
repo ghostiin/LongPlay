@@ -4,7 +4,7 @@ import style from '../../../theme';
 const Wrapper = styled.div`
 	display: flex;
 	font-family: ${style.sansFont};
-	color: ${style.textColor};
+
 	justify-content: space-between;
 	width: 50vw;
 	position: relative;
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 			font-family: ${style.seridFont};
 			font-size: 2.5rem;
 			width: 100%;
-			color: ${style.textColor};
+
 			&::after {
 				content: "";
 
@@ -94,14 +94,14 @@ const Control = styled.div`
 			cursor: pointer;
 		}
 		.center {
-			background-color: ${style.mainColor};
+			background-color: ${({ themeColor }) => themeColor || style.bgColorLight};
 			width: 3rem;
 			height: 3rem;
 			border-radius: 50%;
 			text-align: center;
 			line-height: 3rem;
 			transition: all .2s;
-
+			color: ${style.darkColor};
 			&:hover {
 				transform: scale(1.1);
 			}
@@ -120,7 +120,7 @@ const Control = styled.div`
 			text-align: center;
 			line-height: 2.5rem;
 			transition: all .2s;
-
+			color: ${style.textColor};
 			&:hover {
 				transform: scale(1.1);
 			}

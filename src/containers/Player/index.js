@@ -116,11 +116,11 @@ const Player = () => {
 	const onPlayEnd = () => {
 		if (mode.repeat === true) {
 			playRepeat();
-		} else if (mode.loop === false) {
-			if (currentIdx + 1 === playList.length) {
-				dispatch(actionTypes.setPlayingState(false));
-			}
 		} else {
+			if (mode.loop === false && currentIdx + 1 === playList.length) {
+				dispatch(actionTypes.setPlayingState(false));
+				return;
+			}
 			playNext();
 		}
 	};
@@ -151,6 +151,7 @@ const Player = () => {
 			loaded.current = false;
 			dispatch(actionTypes.setCurrentSong(current));
 			audioRef.current.src = getSongUrl(current.id);
+			if (!audioRef.current) return undefined;
 			setTimeout(() => {
 				audioRef.current.play().then(() => {
 					loaded.current = true;

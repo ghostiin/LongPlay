@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useRef, useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { actions as actionTypes } from '../store';
@@ -13,7 +13,7 @@ import Scroll from '../../../UI/Scroll';
 import style from '../../../theme';
 import default80 from '../default80.svg';
 
-const ZenPlayer = () => {
+const ZenPlayer = ({ themeColor }) => {
 	const loaded = useRef();
 	const audioRef = useRef();
 	const { playing, playList, mode, currentIdx, currentSong } = useSelector((state) => state.player);
@@ -162,6 +162,7 @@ const ZenPlayer = () => {
 			}
 
 			const current = playList[currentIdx];
+			if (!current) return undefined;
 			loaded.current = false;
 			dispatch(actionTypes.setCurrentSong(current));
 			audioRef.current.src = getSongUrl(current.id);
@@ -256,7 +257,7 @@ const ZenPlayer = () => {
 			</div>
 			<audio ref={audioRef} onTimeUpdate={updateCurrentTime} onEnded={onPlayEnd} onError={onErr} />
 			<div className='left'>
-				<Control>
+				<Control themeColor={themeColor}>
 					<div className='sub'>
 						{!_.isEmpty(currentSong) && currentSong.al ? currentSong.al.name : 'No Album'}
 					</div>
@@ -365,6 +366,10 @@ const ZenPlayer = () => {
 			</div>
 		</Wrapper>
 	);
+};
+
+ZenPlayer.propTypes = {
+	themeColor: PropTypes.string.isRequired
 };
 
 export default React.memo(ZenPlayer);

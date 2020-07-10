@@ -21,7 +21,10 @@ function App() {
 					<LogoMuseFont />
 					<IconStyle />
 					<Media.Mobile>
-						<Misc.Inform>Please Use LP On PC Or Enlarge Your Browser</Misc.Inform>
+						<Misc.Inform>
+							Please Use LP On PC Or Enlarge Your Browser<br />
+							<br />mobile/touch IS ON THE WAY...{' '}
+						</Misc.Inform>
 					</Media.Mobile>
 					<Media.Default>{renderRoutes(routes)}</Media.Default>
 				</div>

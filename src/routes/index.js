@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Home from '../containers/Home';
+import About from '../containers/About';
 import Vol from '../containers/Vol';
 import Albums from '../containers/Albums';
 import AlbumDetail from '../containers/Albums/AlbumDetail';
@@ -15,6 +16,10 @@ export default [
 	{
 		component: Home, // 公共组件home
 		routes: [
+			{
+				path: '/about',
+				component: About
+			},
 			{
 				path: '/vol',
 				component: Vol

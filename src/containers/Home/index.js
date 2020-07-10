@@ -26,12 +26,19 @@ function Home({ route }) {
 						LONG PLAY
 					</Logo>
 				</Media.Tablet>
-				<Link to='/zen' className='right'>
-					<Button outlined>
-						<i className='iconfont'>&#xe637;</i>
-						ZEN MODE
-					</Button>
-				</Link>
+				<div className='right'>
+					<Link to='/zen'>
+						<Button outlined>
+							<i className='iconfont'>&#xe637;</i>
+							ZEN MODE
+						</Button>
+					</Link>
+					<Link to='/about'>
+						<div className='about btn'>
+							<i className='iconfont'>&#xe6de;</i>
+						</div>
+					</Link>
+				</div>
 			</Header>
 			<NavBar>
 				<NavItem>

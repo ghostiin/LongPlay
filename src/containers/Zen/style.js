@@ -5,7 +5,9 @@ import style from '../../theme';
 const Wrapper = styled.div`
 	width: 100vw;
 	height: 100vh;
+	background-color: ${({ color }) => color || style.bgColorDark};
 	overflow: hidden;
+	color: ${({ fontColor }) => fontColor || style.textColor};
 
 	.close-btn {
 		background-color: black;
@@ -33,7 +35,7 @@ const Wrapper = styled.div`
 const Header = styled.div`
 	display: flex;
 
-	color: ${style.textColor};
+	/* color: ${style.textColor}; */
 	.center {
 		flex: 1;
 		text-align: center;
