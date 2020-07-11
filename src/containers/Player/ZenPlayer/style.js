@@ -22,7 +22,8 @@ const Wrapper = styled.div`
 		.main {
 			font-family: ${style.seridFont};
 			font-size: 2.5rem;
-			width: 100%;
+			main: 100%;
+			color: ${({ themeColor }) => themeColor || style.textColor};
 
 			&::after {
 				content: "";

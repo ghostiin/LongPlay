@@ -262,7 +262,9 @@ const ZenPlayer = ({ themeColor }) => {
 						{!_.isEmpty(currentSong) && currentSong.al ? currentSong.al.name : 'No Album'}
 					</div>
 					<div className='main'>
-						<Marquee>{!_.isEmpty(currentSong) && currentSong.name ? currentSong.name : 'No Song'}</Marquee>
+						<Marquee style={themeColor ? { color: themeColor } : {}}>
+							{!_.isEmpty(currentSong) && currentSong.name ? currentSong.name : 'No Song'}
+						</Marquee>
 						{/* {!_.isEmpty(currentSong) && currentSong.name ? currentSong.name : 'No Song'} */}
 					</div>
 					<div className='secondary'>
