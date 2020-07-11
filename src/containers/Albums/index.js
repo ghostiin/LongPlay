@@ -46,58 +46,62 @@ function Albums({ route }) {
 	);
 
 	const renderList = (ids, list) => {
-		return ids.map((e) => {
-			const id = e.toString();
-			const item = list[id];
-			const show = !!boxAlbumsList[id];
-			return (
-				<GridItem key={id}>
-					<div className='cover'>
-						<LazyLoad placeholder={<img src={defaultCover} alt='default' />}>
-							<img src={`${item.picUrl}?param=310x310`} alt={item.name} />
-						</LazyLoad>
-						<div className='msk'>
-							<i
-								className='iconfont'
-								onClick={() => dispatch(playerActionTypes.playNow(id))}
-								aria-hidden='true'
-							>
-								&#xe600;
-							</i>
+		if (ids.length) {
+			return ids.map((e) => {
+				const id = e.toString();
+				const item = list[id];
+				const show = !!boxAlbumsList[id];
+				return (
+					<GridItem key={id}>
+						<div className='cover'>
+							<LazyLoad placeholder={<img src={defaultCover} alt='default' />}>
+								<img src={`${item.picUrl}?param=310x310`} alt={item.name} />
+							</LazyLoad>
+							<div className='msk'>
+								<i
+									className='iconfont'
+									onClick={() => dispatch(playerActionTypes.playNow(id))}
+									aria-hidden='true'
+								>
+									&#xe600;
+								</i>
 
-							{show ? (
-								<i
-									className='iconfont'
-									onClick={() => {
-										dispatch(boxActionTypes.removeAlbumFromBox(id));
-									}}
-									aria-hidden='true'
-								>
-									&#xe9fe;
-								</i>
-							) : (
-								<i
-									className='iconfont'
-									onClick={() => {
-										dispatch(boxActionTypes.addAlbumToBox(id));
-									}}
-									aria-hidden='true'
-								>
-									&#xea00;
-								</i>
-							)}
+								{show ? (
+									<i
+										className='iconfont'
+										onClick={() => {
+											dispatch(boxActionTypes.removeAlbumFromBox(id));
+										}}
+										aria-hidden='true'
+									>
+										&#xe9fe;
+									</i>
+								) : (
+									<i
+										className='iconfont'
+										onClick={() => {
+											dispatch(boxActionTypes.addAlbumToBox(id));
+										}}
+										aria-hidden='true'
+									>
+										&#xea00;
+									</i>
+								)}
+							</div>
 						</div>
-					</div>
-					<p>
-						<Link to={`/albums/${id.toString()}`}>{item.name}</Link>
-					</p>
-					<p>
-						<span>By </span>
-						{item.artist.name}
-					</p>
-				</GridItem>
-			);
-		});
+						<p>
+							<Link to={`/albums/${id.toString()}`}>{item.name}</Link>
+						</p>
+						<p>
+							<span>By </span>
+							{item.artist.name}
+						</p>
+					</GridItem>
+				);
+			});
+		}
+
+		return 'No result';
 	};
 
 	const renderTemplate = (caption, ids, list) => {

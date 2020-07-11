@@ -13,32 +13,37 @@ function isDark(rgb) {
 }
 
 const addAlbumToBox = (id) => async (dispatch) => {
-	const res = await getAlbumDetail(id);
-	dispatch({
-		type: ADD_ALBUM_TO_BOX,
-		payload: res
-	});
-	const p = await analyze(res.album.picUrl, { scale: 0.01 }, { ignore: [ 'rgb(255,255,255)', 'rgb(0,0,0)' ] });
-	let dark;
-	let light;
-	for (let i = 0; i < p.length; i++) {
-		const { color } = p[i];
-		if (dark && light) {
-			break;
+	try {
+		const res = await getAlbumDetail(id);
+		dispatch({
+			type: ADD_ALBUM_TO_BOX,
+			payload: res
+		});
+		const p = await analyze(res.album.picUrl, { scale: 0.01 }, { ignore: [ 'rgb(255,255,255)', 'rgb(0,0,0)' ] });
+		let dark;
+		let light;
+		for (let i = 0; i < p.length; i++) {
+			const { color } = p[i];
+			if (dark && light) {
+				break;
+			}
+			if (!dark && isDark(color)) {
+				dark = color;
+			} else if (!light && !isDark(color)) {
+				light = color;
+			}
 		}
-		if (!dark && isDark(color)) {
-			dark = color;
-		} else if (!light && !isDark(color)) {
-			light = color;
-		}
+		dispatch({
+			type: SET_PALETTE,
+			payload: {
+				id,
+				palette: { light, dark }
+			}
+		});
+	} catch (err) {
+		alert(`can't add this album to box!please refresh or check your network!`);
+		console.log(err);
 	}
-	dispatch({
-		type: SET_PALETTE,
-		payload: {
-			id,
-			palette: { light, dark }
-		}
-	});
 };
 
 // album id

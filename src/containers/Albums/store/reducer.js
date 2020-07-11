@@ -40,11 +40,19 @@ const reducer = (state = defaultState, action) =>
 				draftState.newAlbumsList = action.payload.entities.albums;
 				draftState.newAlbumsId = action.payload.result.albums;
 				return draftState;
-			case SEARCH_ALBUMS:
+			case SEARCH_ALBUMS: {
 				// to-do
-				draftState.searchAlbumsList = action.payload.entities.albums;
-				draftState.searchAlbumsId = action.payload.result.albums;
+				const { result } = action.payload;
+				if (result.albumCount) {
+					draftState.searchAlbumsList = action.payload.entities.albums;
+					draftState.searchAlbumsId = action.payload.result.albums;
+				} else {
+					draftState.searchAlbumsList = {};
+					draftState.searchAlbumsId = [];
+				}
+
 				return draftState;
+			}
 			case ENTER_LOADING:
 				draftState.enterLoading = action.payload;
 				return draftState;

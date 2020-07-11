@@ -8,6 +8,7 @@ import createStore from './store/index.bp';
 // import store from './store/index';
 import history from './history';
 import ResetStyle from './theme/globalStyle';
+import MediaStyle from './theme/media';
 import IconStyle from './assets/icons/iconfont';
 import routes from './routes';
 import Media from './components/MediaQueries';
@@ -23,6 +24,7 @@ function App() {
 				<Router history={history}>
 					<div className='App'>
 						<ResetStyle />
+						<MediaStyle />
 						<LogoMuseFont />
 						<IconStyle />
 						<Media.Mobile>
