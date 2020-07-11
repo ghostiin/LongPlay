@@ -1,16 +1,26 @@
-import React from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { lazy, Suspense } from 'react';
 import { Redirect } from 'react-router-dom';
 import Home from '../containers/Home';
-import About from '../containers/About';
 import Vol from '../containers/Vol';
-import Albums from '../containers/Albums';
-import AlbumDetail from '../containers/Albums/AlbumDetail';
-import Zen from '../containers/Zen';
+import About from '../containers/About';
+
+const AlbumsComponent = lazy(() => import('../containers/Albums'));
+const AlbumDetailComponent = lazy(() => import('../containers/Albums/AlbumDetail'));
+const ZenComponent = lazy(() => import('../containers/Zen'));
+
+const SuspenseComponent = (Component) => (props) => {
+	return (
+		<Suspense fallback={null}>
+			<Component {...props} />
+		</Suspense>
+	);
+};
 
 export default [
 	{
 		path: '/zen',
-		component: Zen
+		component: SuspenseComponent(ZenComponent)
 	},
 
 	{
@@ -26,11 +36,11 @@ export default [
 			},
 			{
 				path: '/albums',
-				component: Albums,
+				component: SuspenseComponent(AlbumsComponent),
 				routes: [
 					{
 						path: '/albums/:id',
-						component: AlbumDetail
+						component: SuspenseComponent(AlbumDetailComponent)
 					}
 				]
 			},

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
@@ -16,7 +16,7 @@ const playboxPos = (instance, top, left, width) => {
 	instance.style.height = style.height;
 	// return style;
 };
-const playlistPos = (instance, top, right, width) => {
+const playlistPos = (instance, top, right) => {
 	// width 372px
 	const fixedWidth = '400';
 	const style = {

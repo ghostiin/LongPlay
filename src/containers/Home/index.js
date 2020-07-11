@@ -1,45 +1,16 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import PropTypes from 'prop-types';
-import { NavLink, Link } from 'react-router-dom';
-import { Wrapper, Header, Logo, NavBar, NavItem } from './style';
-import Button from '../../UI/Button';
-import Media from '../../components/MediaQueries';
+import { NavLink } from 'react-router-dom';
+import { Wrapper, NavBar, NavItem } from './style';
+
 import Player from '../Player';
-import logo from './logo.svg';
+import Header from './Header';
 
 function Home({ route }) {
 	return (
 		<Wrapper>
-			<Header>
-				<div className='left'>
-					<img src={logo} alt='Long Play Logo' />
-				</div>
-				<Media.Desktop>
-					<Logo className='center'>
-						LONG PLAY
-						<span>good music to bad days</span>
-					</Logo>
-				</Media.Desktop>
-				<Media.Tablet>
-					<Logo className='center' tablet>
-						LONG PLAY
-					</Logo>
-				</Media.Tablet>
-				<div className='right'>
-					<Link to='/zen'>
-						<Button outlined>
-							<i className='iconfont'>&#xe637;</i>
-							ZEN MODE
-						</Button>
-					</Link>
-					<Link to='/about'>
-						<div className='about home-btn'>
-							<i className='iconfont'>&#xe6de;</i>
-						</div>
-					</Link>
-				</div>
-			</Header>
+			<Header />
 			<NavBar>
 				<NavItem>
 					<NavLink to='/vol' activeClassName='selected'>

@@ -162,4 +162,4 @@ Playlist.defaultProps = {
 	nextAlbum: () => {}
 };
 
-export default Playlist;
+export default React.memo(Playlist);

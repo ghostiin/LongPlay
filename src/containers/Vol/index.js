@@ -6,7 +6,7 @@ import Scroll from '../../UI/Scroll';
 import { actions as playActionTypes } from '../Player/store';
 import { actions as boxActionTypes } from '../../components/Playbox/store';
 import { Wrapper, Content, Item } from './style';
-import { volData } from '../../api/mockData';
+import volData from '../../api/mockData';
 
 // eslint-disable-next-line no-shadow
 function Vol({ volData }) {
