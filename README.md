@@ -1,68 +1,75 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Long Play Music V1
 
-## Available Scripts
+---------
 
-In the project directory, you can run:
+Long Play是一个采用react技术栈编写的Web音乐网站（react hooks+redux+immer）
+[在线Demo](http://116.62.146.32:3001/)
 
-### `npm start`
+网站采用rem布局，已做基础优化。
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+移动端请访问[Long Play Mobile版](https://github.com/ghostiin/LongPlay-Mobile.git)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 技术栈
 
-### `npm test`
+这个项目后端使用 @[Binaryify](https://github.com/Binaryify)/**[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)**，感谢大佬
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+前端技术栈
 
-### `npm run build`
+- React
+- redux ，redux-react ，redux-thunk
+- immer.js
+- Styled-Components
+- axios
+- react-lazyload，better-scroll，lodash等工具，使用eslint+prettier来美化和规范代码
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 功能介绍
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Long Play提供以专辑为playlist的音乐体验，提供完整的专辑收藏/播放器功能
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. 首页推荐
 
-### `npm run eject`
+![image-20200715230640006](D:\Documents\workspace\Projects\LP\longplayv1\assets\image-20200715230640006.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [x] 使用better-scroll封装成项目的scroll基础组件并在项目里多处复用，比如推荐页面的横向scroll
+- [x] 网站使用rem布局，设计翻转卡片样式，增加趣味性
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. 专辑搜索+最新专辑
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![](assets/Snipaste_2020-07-15_23-16-58.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [x] 对于可能的高频率输入连续触发搜索的问题，使用防抖函数进行了优化
+- [x] 专辑列表的展示使用grid布局，可自适应
+- [x] 添加加载loading动画，提升用户体验
 
-## Learn More
+3. 专辑详情页
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![](assets/Snipaste_2020-07-15_23-21-16.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [x] 使用react portals封装modal组件，使用modal组件来展示专辑详情
 
-### Code Splitting
+4. 播放器相关
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+![](assets/Snipaste_2020-07-15_23-28-23.png)
 
-### Analyzing the Bundle Size
+- [x] 封装select组件，playlist组件和playbox组件在此基础上完成
+- [ ] 收藏专辑会被存入local storage，下次打开即可立即开始收听
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![](assets/Snipaste_2020-07-15_23-31-58.png)
 
-### Making a Progressive Web App
+- [x] 对于收藏专辑，使用rgbaster.js提取专辑封面中占比最大的亮色和暗色，zen player页面随专辑封面取色而变色，提升网站精致度和使用体验
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## TO-DOS
 
-### Advanced Configuration
+- [ ] 增加分页功能
+- [ ] 增加更丰富功能，eg. 使用genius api 添加歌词解析模块
+- [ ] 添加“一键删除全部收藏专辑”功能
+- [ ] 在播放前/收藏专辑前提前识别该专辑是否有合法收听资源（比如网易云vip&收费专辑在未登录状态下无法获取播放资源的）
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+- [ ] 增加网易云登录功能（需https）
+- [ ] 增加PWA支持（需https）
 
-### Deployment
+----------------------------------------------------
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- 已过时 [v0.99](http://116.62.146.32:3010/)
 
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- 开发笔记 [notion](https://www.notion.so/LongPlay-a12c316b58df4e519279d3078b05a341)
