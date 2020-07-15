@@ -28,7 +28,7 @@ Long Play提供以专辑为playlist的音乐体验，提供完整的专辑收藏
 
 1. 首页推荐
 
-![image-20200715230640006](D:\Documents\workspace\Projects\LP\longplayv1\assets\image-20200715230640006.png)
+![image-20200715230640006](assets/image-20200715230640006.png)
 
 - [x] 使用better-scroll封装成项目的scroll基础组件并在项目里多处复用，比如推荐页面的横向scroll
 - [x] 网站使用rem布局，设计翻转卡片样式，增加趣味性
